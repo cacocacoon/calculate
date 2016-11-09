@@ -2,8 +2,8 @@ import Immutable from 'immutable';
 
 
 export const UIState = Immutable.fromJS({
-	logInModalIsOpen: false,
 	logIn: {
+		modalIsOpen: false,
 		enableLogInButton: true
 	}
 });

@@ -9,15 +9,11 @@ import {
 // NOTE: state 設定好資料記得要 return 才能真正修改 state
 const uiReducers = handleActions({
 	OPEN_LOG_IN_MODAL: (state) => (
-		state.merge({
-			logInModalIsOpen: true
-		})
+		state.setIn(['logIn', 'modalIsOpen'], true)
 	),
 
 	CLOSE_LOG_IN_MODAL: (state) => (
-		state.merge({
-			logInModalIsOpen: false
-		})
+		state.setIn(['logIn', 'modalIsOpen'], false)
 	),
 
 	ENABLE_LOG_IN_BUTTON: (state) => (

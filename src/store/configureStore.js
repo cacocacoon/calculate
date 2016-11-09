@@ -5,18 +5,18 @@ import Immutable from 'immutable';
 import rootReducer from '../reducers/rootReducer';
 
 const initialState = Immutable.fromJS({
-	ui: {
-		logInModalIsOpen: false,
-		logIn: {
-			enableLogInButton: true
-		},
-	},
-	data: {
-		logIn: {
-			email: '',
-			password: '',
-		},
-	}
+	// ui: {
+	// 	logIn: {
+	// 		modalIsOpen: false,
+	// 		enableLogInButton: true
+	// 	},
+	// },
+	// data: {
+	// 	logIn: {
+	// 		email: '',
+	// 		password: '',
+	// 	},
+	// }
 });
 
 export default createStore(

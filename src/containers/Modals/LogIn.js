@@ -13,7 +13,7 @@ import {
 export default connect(
 	(state) => {
 		let stateMap = {
-			open: state.getIn(['ui', 'logInModalIsOpen']),
+			open: state.getIn(['ui', 'logIn', 'modalIsOpen']),
 			enableLogInButton: state.getIn(['ui', 'logIn', 'enableLogInButton']),
 			email: state.getIn(['data', 'logIn', 'email']),
 			password: state.getIn(['data', 'logIn', 'password']),
