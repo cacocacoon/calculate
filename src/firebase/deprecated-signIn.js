@@ -1,10 +1,10 @@
 import auth from './auth';
 
-let signedIn = false;
-//
 auth.onAuthStateChanged(function(user) {
 	if (user) {
-		signedIn = true;
+
+	} else {
+
 	}
 	// else {
 	// 	const email = 'cacocacoon@gmail.com';
@@ -18,5 +18,3 @@ auth.onAuthStateChanged(function(user) {
 	// 	});
 	// }
 });
-
-export default signedIn;

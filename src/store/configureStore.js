@@ -3,17 +3,18 @@ import reduxThunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import Immutable from 'immutable';
 import rootReducer from '../reducers/rootReducer';
-import isSignIn from '../firebase/signIn';
 
-// TODO: 登入狀態在初始化時期就要先跟firebase詢問是否已登入
 const initialState = Immutable.fromJS({
 	ui: {
-		logInModalIsOpen: !isSignIn
+		logInModalIsOpen: false,
+		logIn: {
+			enableLogInButton: true
+		},
 	},
 	data: {
 		logIn: {
 			email: '',
-			password: ''
+			password: '',
 		},
 	}
 });
