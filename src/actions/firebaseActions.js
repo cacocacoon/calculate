@@ -9,10 +9,10 @@ import {
 	changePassword,
 } from '../actions/logInModalActions';
 
-// TODO: 製作async action DONE
+// NOTE: async action
 export const logInFireBase = (email, password) => {
 	return (dispatch) => {
-		// TODO: 要鎖住登入按鈕避免重複執行 DONE
+		// NOTE: 要鎖住登入按鈕避免重複執行 DONE
 		dispatch(disableLogInButton());
 		firebaseAuth.signInWithEmailAndPassword(email, password)
 			.then(user => {
@@ -22,10 +22,10 @@ export const logInFireBase = (email, password) => {
 				console.log('帳號密碼錯誤', e);
 			})
 			.then(() => {
-				// TODO: 要確認登入結束登入後輸入框有沒有清空 DONE
+				// NOTE: 輸入框清空
 				dispatch(changeEmail({email: ''}));
 				dispatch(changePassword({password: ''}));
-				// TODO: 結束登入後，解開按鈕鎖 DONE
+				// NOTE: 解開按鈕鎖 DONE
 				dispatch(enableLogInButton());
 			});
 
