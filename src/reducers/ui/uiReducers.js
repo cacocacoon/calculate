@@ -23,6 +23,10 @@ const uiReducers = handleActions({
 	DISABLE_LOG_IN_BUTTON: (state) => (
 		state.setIn(['logIn', 'enableLogInButton'], false)
 	),
+
+	GO_OPERATING_STEP: (state, {payload}) => {
+		return state.setIn(['operateReminderList', 'step'], payload.step);
+	},
 }, UIState);
 
 export default uiReducers;

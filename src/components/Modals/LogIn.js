@@ -40,7 +40,7 @@ class LogIn extends React.Component {
 		return (
 			<div>
 				<RaisedButton
-					label="Modal Dialog"
+					label="開啟登入方塊"
 					onTouchTap={openModal}
 					/>
 				<Dialog

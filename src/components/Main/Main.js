@@ -1,5 +1,6 @@
 import React from 'react';
 import LogInModal from '../../containers/Modals/LogIn';
+import OperateModal from '../../containers/Modals/Operate';
 
 class Main extends React.Component {
 	constructor(props) {
@@ -8,7 +9,13 @@ class Main extends React.Component {
 
 	render() {
 		return (
-				<LogInModal />
+			<div>
+				{
+					// <LogInModal />
+					// // TODO: 1. ADD or MODIFY modal (d -> t)
+				}
+				<OperateModal />
+			</div>
 		);
 	}
 }

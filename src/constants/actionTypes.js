@@ -5,3 +5,7 @@ export const CHANGE_EMAIL = 'CHANGE_EMAIL';
 export const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
 export const DISABLE_LOG_IN_BUTTON = 'DISABLE_LOG_IN_BUTTON';
 export const ENABLE_LOG_IN_BUTTON = 'ENABLE_LOG_IN_BUTTON';
+
+// operating reminderlist stepper
+export const GO_OPERATING_STEP = 'GO_OPERATING_STEP';
+export const SET_OPERATING_TYPE = 'SET_OPERATING_TYPE';
