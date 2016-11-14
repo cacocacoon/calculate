@@ -18,5 +18,8 @@ export const dataState = Immutable.fromJS({
 	},
 	operateReminderList: {
 		type: '',
+		name: '',
+		nameList: [],
+		errorText: '',
 	},
 });

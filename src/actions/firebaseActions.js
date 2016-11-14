@@ -1,5 +1,6 @@
 import 'whatwg-fetch';
 import firebaseAuth from '../firebase/auth';
+import fbDatabase from '../firebase/database';
 
 import {
 	enableLogInButton,
@@ -8,6 +9,10 @@ import {
 	changeEmail,
 	changePassword,
 } from '../actions/logInModalActions';
+
+import {
+	setReminderListNameList,
+} from '../actions/operateReminderList';
 
 // NOTE: async action
 export const logInFireBase = (email, password) => {
@@ -31,3 +36,13 @@ export const logInFireBase = (email, password) => {
 
 	}
 }
+
+export const getReminderListNameListFromFirebase = () => (dispatch) => {
+	const reminderListRef = fbDatabase.ref('reminderList');
+	reminderListRef.on('value', (snapShot) => {
+		const reminderList = snapShot.val();
+		const reminderListNameList = Object.keys(reminderList);
+		// console.log('reminderListNameList: ', reminderListNameList);
+		dispatch(setReminderListNameList({reminderListNameList}));
+	});
+};

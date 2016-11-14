@@ -11,7 +11,16 @@ const dataReducers = handleActions({
 	},
 	SET_OPERATING_TYPE: (state, {payload}) => {
 		return state.setIn(['operateReminderList', 'type'], payload.type);
-	}
+	},
+	SET_REMINDERLIST_NAMELIST: (state, {payload}) => {
+		return state.setIn(['operateReminderList', 'nameList'], payload.reminderListNameList);
+	},
+	SET_OPERATE_NAME_INPUT_ERRORTEXT: (state, {payload}) => {
+		return state.setIn(['operateReminderList', 'errorText'], payload.errorText);
+	},
+	SET_OPERATE_REMINDERLIST_NAME: (state, {payload}) => {
+		return state.setIn(['operateReminderList', 'name'], payload.name);
+	},
 }, dataState);
 
 export default dataReducers;

@@ -12,37 +12,10 @@ import TextField from 'material-ui/TextField';
 import AutoComplete from 'material-ui/AutoComplete';
 import {OPERATE_REMINDER_LIST} from '../../constants/CONST';
 
-/**
-* A basic vertical non-linear implementation
-*/
-
-const STEP_1 = 'STEP_1';
-const STEP_2 = 'STEP_2';
 
 const CREATE = OPERATE_REMINDER_LIST.getIn(['TYPE', 'CREATE']);
 const FETCH = OPERATE_REMINDER_LIST.getIn(['TYPE', 'FETCH']);
 class InitReminderList extends React.Component {
-
-	// constructor() {
-	// 	super();
-	// 	this.state = {
-	// 		stepIndex: 0,
-	// 	}
-	// }
-
-	// handleNext() {
-	// 	const {stepIndex} = this.state;
-	// 	if (stepIndex < 2) {
-	// 		this.setState({stepIndex: stepIndex + 1});
-	// 	}
-	// };
-	//
-	// handlePrev() {
-	// 	const {stepIndex} = this.state;
-	// 	if (stepIndex > 0) {
-	// 		this.setState({stepIndex: stepIndex - 1});
-	// 	}
-	// };
 
 	render() {
 		const {
@@ -50,16 +23,24 @@ class InitReminderList extends React.Component {
 			goToStep,
 			step,
 			type,
+			name,
+			nameList,
+			updateFetchInput,
+			updateCreateInput,
+			errorText,
+			finish
 		} = this.props;
 
 		const finishButton = (
 			<div style={{margin: '12px 0', display: 'flex', justifyContent: 'flex-end'}}>
 				<RaisedButton
 					label="完成"
+					onClick={finish(name, nameList, type)}
 					disableTouchRipple={true}
 					disableFocusRipple={true}
+					disabled={false}
 					primary={true}
-					onTouchTap={handleNext}
+					onTouchTap={() => null}
 					style={{marginRight: 12}}
 					/>
 			</div>
@@ -77,6 +58,33 @@ class InitReminderList extends React.Component {
 			</Chip>
 		);
 
+		const ReminderListNameInputText = (props) => {
+			switch (props.type) {
+				case CREATE:
+					return (
+						<AutoComplete
+							searchText={name}
+							hintText="新增明細表"
+							dataSource={[]}
+							onBlur={updateCreateInput}
+							errorText={errorText}
+							/>
+					);
+				case FETCH:
+					return (
+						<AutoComplete
+							searchText={name}
+							hintText="搜尋明細表"
+							dataSource={nameList}
+							openOnFocus={true}
+							onBlur={updateFetchInput}
+							errorText={errorText}
+							/>
+					);
+				default:
+					return null;
+			}
+		};
 		return (
 			<div style={{maxWidth: 380, maxHeight: 400, margin: 'auto'}}>
 				<Stepper
@@ -101,12 +109,7 @@ class InitReminderList extends React.Component {
 							輸入名稱
 						</StepButton>
 						<StepContent>
-							<AutoComplete
-								hintText="XX有限公司"
-								dataSource={getDataSource()}
-								onUpdateInput={() => null}
-								errorText={null}
-								/>
+							<ReminderListNameInputText type={type} />
 							{finishButton}
 						</StepContent>
 					</Step>
