@@ -31,7 +31,7 @@ class InitReminderList extends React.Component {
 			finish
 		} = this.props;
 
-		const finishButton = (
+		const FinishButton = () => (
 			<div style={{margin: '12px 0', display: 'flex', justifyContent: 'flex-end'}}>
 				<RaisedButton
 					label="完成"
@@ -59,7 +59,7 @@ class InitReminderList extends React.Component {
 		);
 
 		const ReminderListNameInputText = (props) => {
-			switch (props.type) {
+			switch(props.type) {
 				case CREATE:
 					return (
 						<AutoComplete
@@ -110,7 +110,7 @@ class InitReminderList extends React.Component {
 						</StepButton>
 						<StepContent>
 							<ReminderListNameInputText type={type} />
-							{finishButton}
+							<FinishButton />
 						</StepContent>
 					</Step>
 				</Stepper>

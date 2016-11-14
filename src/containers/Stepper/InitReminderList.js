@@ -36,61 +36,37 @@ export default connect(
 		},
 
 		updateCreateInput: (event) => {
-			//nameList do not includes inputText, if not, set errorText
-			// if(nameList.includes(inputText)) {
-			// 	//TODO: set errorText
-			// 	dispatch(setOperateNameInputErrorText({
-			// 		errorText: '明細表名稱重複',
-			// 	}));
-			// }
-			// else {
-			// 	dispatch(setOperateNameInputErrorText({
-			// 		errorText: '',
-			// 	}));
-			// }
 			//TODO: save inputText to state
 			dispatch(setOperateReminderListName({name: event.target.value}));
 		},
 		updateFetchInput: (event) => {
-			//nameList do includes inputText, if not, set errorText
-			// if(!nameList.includes(inputText)) {
-			// 	//TODO: set errorText
-			// 	dispatch(setOperateNameInputErrorText({
-			// 		errorText: '找不到明細表',
-			// 	}));
-			// }
-			// else {
-			// 	dispatch(setOperateNameInputErrorText({
-			// 		errorText: '',
-			// 	}));
-			// }
 			//TODO: save inputText to state
 			dispatch(setOperateReminderListName({name: event.target.value}));
 		},
+
 		finish: (name, nameList, type) => {
-			if(type === CREATE) {
-				return () => {
-					// TODO: 新開的明細表名字如果重複就要丟出errorText
-					if(nameList.includes(name)) {
-						dispatch(setOperateNameInputErrorText({errorText: '明細表名稱重複'}));
-						return ;
-					}
+			//根據不同　type 回傳不同的function
+			switch(type) {
+				case CREATE:
+					return () => {
+						// TODO: 新開的明細表名字如果重複就要丟出errorText
+						if(nameList.includes(name)) {
+							dispatch(setOperateNameInputErrorText({errorText: '明細表名稱重複'}));
+							return ;
+						}
 
-					dispatch(setOperateNameInputErrorText({errorText: ''}));
+						dispatch(setOperateNameInputErrorText({errorText: ''}));
+					};
+				case FETCH:
+					return () => {
+						// TODO: 搜尋的明細表名字如果不存在就要丟出errorText
+						if(!nameList.includes(name)) {
+							dispatch(setOperateNameInputErrorText({errorText: '找不到明細表'}));
+							return ;
+						}
 
-
-				};
-			}
-			if(type === FETCH) {
-				return () => {
-					// TODO: 搜尋的明細表名字如果不存在就要丟出errorText
-					if(!nameList.includes(name)) {
-						dispatch(setOperateNameInputErrorText({errorText: '找不到明細表'}));
-						return ;
-					}
-
-					dispatch(setOperateNameInputErrorText({errorText: ''}));
-				};
+						dispatch(setOperateNameInputErrorText({errorText: ''}));
+					};
 			}
 		},
 	}),
