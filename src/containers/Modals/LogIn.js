@@ -7,7 +7,8 @@ import {
 	openLogInModal,
 	changeEmail,
 	changePassword,
-	logInFireBase
+	logInFireBase,
+	openOperateModal,
 } from '../../actions';
 
 export default connect(
@@ -39,6 +40,7 @@ export default connect(
 
 		logIn: (email, password) => () => {
 			dispatch(logInFireBase(email.trim(), password.trim()));
+			dispatch(openOperateModal());
 		},
 
 		onChangeEmail: (event) => {

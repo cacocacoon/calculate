@@ -1,11 +1,6 @@
 import {handleActions} from 'redux-actions';
 import {UIState} from '../../constants/models';
 
-import {
-	OPEN_LOG_IN_MODAL,
-	CLOSE_LOG_IN_MODAL
-} from '../../constants/actionTypes';
-
 // NOTE: state 設定好資料記得要 return 才能真正修改 state
 const uiReducers = handleActions({
 	OPEN_LOG_IN_MODAL: (state) => (
@@ -27,6 +22,14 @@ const uiReducers = handleActions({
 	GO_OPERATING_STEP: (state, {payload}) => {
 		return state.setIn(['operateReminderList', 'step'], payload.step);
 	},
+
+	OPEN_OPERATE_MODAL: (state) => {
+		return state.setIn(['operateReminderList', 'open'], true);
+	},
+
+	CLOSE_OPERATE_MODAL: (state) => {
+		return state.setIn(['operateReminderList', 'open'], false);
+	}
 }, UIState);
 
 export default uiReducers;

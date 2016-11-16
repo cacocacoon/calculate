@@ -9,23 +9,17 @@ class Operate extends React.Component {
 
 	render() {
 		const {
+			open,
 		} = this.props;
 
 		// TODO: add stepper
 		// let InitReminderStepper = [];
 		return (
 			<div>
-			{
-
-				// <RaisedButton
-				// 	label="新增或修改明細表"
-				// 	onTouchTap={openModal}
-				// 	/>
-			}
 				<Dialog
 					title="操作明細表"
 					modal={true}
-					open={true}
+					open={open}
 					contentStyle={{width: '375px'}}
 					>
 					<InitReminderListStepper />

@@ -8,6 +8,8 @@ import {
 	getReminderListNameListFromFirebase,
 	setOperateNameInputErrorText,
 	setOperateReminderListName,
+	createReminderList,
+	fetchReminderList,
 } from '../../actions';
 
 const CREATE = OPERATE_REMINDER_LIST.getIn(['TYPE', 'CREATE']);
@@ -23,6 +25,7 @@ export default connect(
 	}),
 
 	(dispatch) => ({
+
 		goToStep: (step) => () => {
 			dispatch(goOperatingStep({step}));
 			// TODO: clean step2 data
@@ -35,13 +38,10 @@ export default connect(
 			dispatch(getReminderListNameListFromFirebase());
 		},
 
-		updateCreateInput: (event) => {
+		setInputName: (inputText, index) => {
 			//TODO: save inputText to state
-			dispatch(setOperateReminderListName({name: event.target.value}));
-		},
-		updateFetchInput: (event) => {
-			//TODO: save inputText to state
-			dispatch(setOperateReminderListName({name: event.target.value}));
+			// event.preventDefault();
+			dispatch(setOperateReminderListName({name: inputText}));
 		},
 
 		finish: (name, nameList, type) => {
@@ -49,6 +49,7 @@ export default connect(
 			switch(type) {
 				case CREATE:
 					return () => {
+						dispatch(setOperateReminderListName({name}));
 						// TODO: 新開的明細表名字如果重複就要丟出errorText
 						if(nameList.includes(name)) {
 							dispatch(setOperateNameInputErrorText({errorText: '明細表名稱重複'}));
@@ -56,9 +57,12 @@ export default connect(
 						}
 
 						dispatch(setOperateNameInputErrorText({errorText: ''}));
+						// TODO: new data in firebase
+						dispatch(createReminderList(name));
 					};
 				case FETCH:
 					return () => {
+						dispatch(setOperateReminderListName({name}));
 						// TODO: 搜尋的明細表名字如果不存在就要丟出errorText
 						if(!nameList.includes(name)) {
 							dispatch(setOperateNameInputErrorText({errorText: '找不到明細表'}));
@@ -66,6 +70,7 @@ export default connect(
 						}
 
 						dispatch(setOperateNameInputErrorText({errorText: ''}));
+						dispatch(fetchReminderList(name));
 					};
 			}
 		},

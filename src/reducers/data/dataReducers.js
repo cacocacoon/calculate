@@ -1,3 +1,4 @@
+import Immutable from 'immutable';
 import {handleActions} from 'redux-actions';
 import {dataState} from '../../constants/models';
 
@@ -20,6 +21,9 @@ const dataReducers = handleActions({
 	},
 	SET_OPERATE_REMINDERLIST_NAME: (state, {payload}) => {
 		return state.setIn(['operateReminderList', 'name'], payload.name);
+	},
+	SET_REMINDERLIST: (state, {payload}) => {
+		return state.set('reminderList', Immutable.fromJS(payload));
 	},
 }, dataState);
 

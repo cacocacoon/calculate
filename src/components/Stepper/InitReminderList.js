@@ -17,6 +17,18 @@ const CREATE = OPERATE_REMINDER_LIST.getIn(['TYPE', 'CREATE']);
 const FETCH = OPERATE_REMINDER_LIST.getIn(['TYPE', 'FETCH']);
 class InitReminderList extends React.Component {
 
+	constructor() {
+		super();
+		this.state = {
+			temp_name: '',
+		}
+		this.updateTemp_Name = this.updateTemp_Name.bind(this);
+	}
+
+	updateTemp_Name(inputText) {
+		this.setState({temp_name: inputText});
+	}
+
 	render() {
 		const {
 			setOperatingType,
@@ -25,22 +37,20 @@ class InitReminderList extends React.Component {
 			type,
 			name,
 			nameList,
-			updateFetchInput,
-			updateCreateInput,
+			setInputName,
 			errorText,
 			finish
 		} = this.props;
 
-		const FinishButton = () => (
+		const FinishButton = (props) => (
 			<div style={{margin: '12px 0', display: 'flex', justifyContent: 'flex-end'}}>
 				<RaisedButton
 					label="完成"
-					onClick={finish(name, nameList, type)}
 					disableTouchRipple={true}
 					disableFocusRipple={true}
 					disabled={false}
 					primary={true}
-					onTouchTap={() => null}
+					onTouchTap={finish(props.tempName, nameList, type)}
 					style={{marginRight: 12}}
 					/>
 			</div>
@@ -63,21 +73,20 @@ class InitReminderList extends React.Component {
 				case CREATE:
 					return (
 						<AutoComplete
-							searchText={name}
 							hintText="新增明細表"
+							searchText={props.tempName}
 							dataSource={[]}
-							onBlur={updateCreateInput}
+							onNewRequest={props.updateTempName}
 							errorText={errorText}
 							/>
 					);
 				case FETCH:
 					return (
 						<AutoComplete
-							searchText={name}
 							hintText="搜尋明細表"
+							searchText={props.tempName}
 							dataSource={nameList}
-							openOnFocus={true}
-							onBlur={updateFetchInput}
+							onNewRequest={props.updateTempName}
 							errorText={errorText}
 							/>
 					);
@@ -109,8 +118,12 @@ class InitReminderList extends React.Component {
 							輸入名稱
 						</StepButton>
 						<StepContent>
-							<ReminderListNameInputText type={type} />
-							<FinishButton />
+							<ReminderListNameInputText
+								type={type}
+								updateTempName={this.updateTemp_Name}
+								tempName={this.state.temp_name}
+								/>
+							<FinishButton tempName={this.state.temp_name} />
 						</StepContent>
 					</Step>
 				</Stepper>

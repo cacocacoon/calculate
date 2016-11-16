@@ -6,14 +6,7 @@ import {
 } from '../../actions';
 
 export default connect(
-	(state) => {
-		let stateMap = {};
-
-		return stateMap;
-	},
-
-	(dispatch) => ({
-
-	})
-
+	(state) => ({
+		open: state.getIn(['ui', 'operateReminderList', 'open']),
+	}),
 )(Operate);

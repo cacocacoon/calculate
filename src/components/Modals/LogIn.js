@@ -24,11 +24,11 @@ class LogIn extends React.Component {
 		} = this.props;
 
 		const actions = [
-			<FlatButton
-				label="取消"
-				secondary={true}
-				onTouchTap={closeModal}
-				/>,
+			// <FlatButton
+			// 	label="取消"
+			// 	secondary={true}
+			// 	onTouchTap={closeModal}
+			// 	/>,
 			<FlatButton
 				label="登入"
 				primary={true}
@@ -39,16 +39,18 @@ class LogIn extends React.Component {
 
 		return (
 			<div>
-				<RaisedButton
-					label="開啟登入方塊"
-					onTouchTap={openModal}
-					/>
+				{
+					// <RaisedButton
+					// 	label="開啟登入方塊"
+					// 	onTouchTap={openModal}
+					// 	/>
+				}
 				<Dialog
 					title="登入"
 					actions={actions}
 					modal={true}
 					open={open}
-					contentStyle={{width: '25%'}}
+					contentStyle={{width: '325px'}}
 					>
 					<TextField
 						hintText="luke@ppt.cc"

@@ -7,6 +7,7 @@ export const UIState = Immutable.fromJS({
 		enableLogInButton: true
 	},
 	operateReminderList: {
+		open: false,
 		step: 0,
 	},
 });
@@ -22,4 +23,5 @@ export const dataState = Immutable.fromJS({
 		nameList: [],
 		errorText: '',
 	},
+
 });

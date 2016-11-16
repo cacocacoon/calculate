@@ -10,11 +10,11 @@ class Main extends React.Component {
 	render() {
 		return (
 			<div>
-				{
-					// <LogInModal />
-					// // TODO: 1. ADD or MODIFY modal (d -> t)
-				}
-				<OperateModal />
+					<LogInModal />
+					{
+						// TODO: 1. ADD or MODIFY modal (d -> t)
+					}
+					<OperateModal />
 			</div>
 		);
 	}
