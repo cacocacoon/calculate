@@ -8,6 +8,8 @@ import {
 	changeEmail,
 	changePassword,
 	logInFireBase,
+	initOperateModalUi,
+	initOperateModalData,
 	openOperateModal,
 } from '../../actions';
 
@@ -29,10 +31,10 @@ export default connect(
 			// return ;
 			firebaseAuth.onAuthStateChanged((user) => {
 				if (user) {
-					console.log('以登入');
+					console.log('已登入: ', user.email);
 					dispatch(closeLogInModal());
 				} else {
-					console.log('以登出');
+					console.log('已登出');
 					dispatch(openLogInModal());
 				}
 			});
@@ -40,6 +42,9 @@ export default connect(
 
 		logIn: (email, password) => () => {
 			dispatch(logInFireBase(email.trim(), password.trim()));
+			// TODO: 初始化 operate modal
+			dispatch(initOperateModalUi());
+			dispatch(initOperateModalData());
 			dispatch(openOperateModal());
 		},
 

@@ -1,7 +1,11 @@
 import React from 'react';
 import LogInModal from '../../containers/Modals/LogIn';
 import OperateModal from '../../containers/Modals/Operate';
-import HeaderBar from  '../../components/HeaderBar/HeaderBar'
+import HeaderBar from  '../../containers/HeaderBar/HeaderBar';
+import AddReminderButton from '../../containers/AddReminder/Button';
+
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 
 class Main extends React.Component {
 	constructor(props) {

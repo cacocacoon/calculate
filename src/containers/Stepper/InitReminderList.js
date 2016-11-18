@@ -10,6 +10,7 @@ import {
 	setOperateReminderListName,
 	createReminderList,
 	fetchReminderList,
+	closeOperateModal
 } from '../../actions';
 
 const CREATE = OPERATE_REMINDER_LIST.getIn(['TYPE', 'CREATE']);
@@ -59,6 +60,7 @@ export default connect(
 						dispatch(setOperateNameInputErrorText({errorText: ''}));
 						// TODO: new data in firebase
 						dispatch(createReminderList(name));
+						dispatch(closeOperateModal());
 					};
 				case FETCH:
 					return () => {
@@ -71,6 +73,7 @@ export default connect(
 
 						dispatch(setOperateNameInputErrorText({errorText: ''}));
 						dispatch(fetchReminderList(name));
+						dispatch(closeOperateModal());
 					};
 			}
 		},
