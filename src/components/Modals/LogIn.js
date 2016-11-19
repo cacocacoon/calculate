@@ -7,7 +7,7 @@ import TextField from 'material-ui/TextField';
 class LogIn extends React.Component {
 
 	componentWillMount() {
-		this.props.componentWillMount();
+		this.props.componentWillMount(this.props.open);
 	}
 
 	render() {
