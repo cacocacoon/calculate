@@ -42,11 +42,12 @@ export default connect(
 		setInputName: (inputText, index) => {
 			//TODO: save inputText to state
 			// event.preventDefault();
-			dispatch(setOperateReminderListName({name: inputText}));
+			dispatch(setOperateReminderListName({name: inputText.trim()}));
 		},
 
 		finish: (name, nameList, type) => {
 			//根據不同　type 回傳不同的function
+			name = name.trim();
 			switch(type) {
 				case CREATE:
 					return () => {

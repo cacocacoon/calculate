@@ -7,8 +7,9 @@ export class BillingReminder {
 		this.dieselTotal = new DieselTotal();
 		this.lubOilTotal = new LubOilTotal();
 		this.totalPrice = 0;
+		this.taxExcluded = 0;
 		this.tax = 0;
-		this.list = [];
+		this.entities = [];
 	}
 
 }
@@ -32,10 +33,9 @@ export const LUB_OIL = 'LUB_OIL';
 export class BillingEntity {
 	constructor() {
 		this.type = '';
-		this.id = 0;
 		this.date = '';
 		this.product = '';
-		this.count = '';
+		this.count = 0;
 		this.unit = '';
 		this.unitPrice = 0;
 		this.price = 0;

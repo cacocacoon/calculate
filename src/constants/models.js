@@ -10,6 +10,9 @@ export const UIState = Immutable.fromJS({
 		open: false,
 		step: 0,
 	},
+	reminderEditor: {
+		open: true,
+	}
 });
 
 export const dataState = Immutable.fromJS({
@@ -23,5 +26,35 @@ export const dataState = Immutable.fromJS({
 		nameList: [],
 		errorText: '',
 	},
+	createEntity: {
+		type: {
+			value: 'DIESEL',
+			errorText: ''
+		},
+		date: {
+			value: '',
+			errorText: '',
+		},
+		product: {
+			value: '超級柴油',
+			errorText: '',
+		},
+		count: {
+			value: '0',
+			errorText: '',
+		},
+		unit: {
+			value: 'L',
+			errorText: '',
+		},
+		unitPrice: {
+			value: '0.0',
+			errorText: '',
+		},
+		remark: {
+			value: '',
+			errorText: '',
+		},
+	}
 
 });

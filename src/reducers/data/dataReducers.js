@@ -37,6 +37,34 @@ const dataReducers = handleActions({
 		return state.set('operateReminderList', STEPPER_INIT_STATE.get('DATA'));
 	},
 
+	SET_CREATE_ENTITY_TYPE: (state, {payload}) => {
+		return state.setIn(['createEntity', 'type'], Immutable.fromJS(payload));
+	},
+
+	SET_CREATE_ENTITY_DATE: (state, {payload}) => {
+		return state.setIn(['createEntity', 'date'], Immutable.fromJS(payload));
+	},
+
+	SET_CREATE_ENTITY_PRODUCT: (state, {payload}) => {
+		return state.setIn(['createEntity', 'product'], Immutable.fromJS(payload));
+	},
+
+	SET_CREATE_ENTITY_COUNT: (state, {payload}) => {
+		return state.setIn(['createEntity', 'count'], Immutable.fromJS(payload));
+	},
+
+	SET_CREATE_ENTITY_UNIT: (state, {payload}) => {
+		return state.setIn(['createEntity', 'unit'], Immutable.fromJS(payload));
+	},
+
+	SET_CREATE_ENTITY_UNITPRICE: (state, {payload}) => {
+		return state.setIn(['createEntity', 'unitPrice'], Immutable.fromJS(payload));
+	},
+
+	SET_CREATE_ENTITY_REMARK: (state, {payload}) => {
+		return state.setIn(['createEntity', 'remark'], Immutable.fromJS(payload));
+	},
+
 }, dataState);
 
 export default dataReducers;

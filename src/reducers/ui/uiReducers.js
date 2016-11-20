@@ -37,6 +37,14 @@ const uiReducers = handleActions({
 		return state.set('operateReminderList', STEPPER_INIT_STATE.get('UI'));
 	},
 
+	OPEN_REMINDER_EDITOR: (state) => {
+		return state.setIn(['reminderEditor', 'open'], true);
+	},
+
+	CLOSE_REMINDER_EDITOR: (state) => {
+		return state.setIn(['reminderEditor', 'open'], false);
+	},
+
 }, UIState);
 
 export default uiReducers;

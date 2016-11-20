@@ -1,11 +1,9 @@
 import React from 'react';
+import HeaderBar from  '../../containers/HeaderBar/HeaderBar';
 import LogInModal from '../../containers/Modals/LogIn';
 import OperateModal from '../../containers/Modals/Operate';
-import HeaderBar from  '../../containers/HeaderBar/HeaderBar';
-import AddReminderButton from '../../containers/AddReminder/Button';
-
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
+import EditorModal from '../../containers/Modals/Editor';
+import AddReminderButton from '../../containers/Button/AddReminder';
 
 class Main extends React.Component {
 	constructor(props) {
@@ -25,6 +23,8 @@ class Main extends React.Component {
 					// Operate Modal 跳出來時先初始化
 				}
 				<OperateModal />
+				<EditorModal />
+				<AddReminderButton />
 			</div>
 		);
 	}
