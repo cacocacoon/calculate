@@ -23,6 +23,7 @@ export default createStore(
 	rootReducer,
 	initialState,
 	composeEnhancers(
-		applyMiddleware(reduxThunk, createLogger({stateTransformer: state => state.toJS()}))
+		applyMiddleware(reduxThunk)
+		// applyMiddleware(reduxThunk, createLogger({stateTransformer: state => state.toJS()}))
 	)
 );
