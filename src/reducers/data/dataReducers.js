@@ -2,7 +2,11 @@ import Immutable from 'immutable';
 import {handleActions} from 'redux-actions';
 import {dataState} from '../../constants/models';
 
-import {STEPPER_INIT_STATE, ENTITY} from '../../constants/CONST';
+import {
+	STEPPER_INIT_STATE,
+	ENTITY,
+	INIT_CREATE_ENTITY
+} from '../../constants/CONST';
 // NOTE: state 設定好資料記得要 return 才能真正修改 state
 const dataReducers = handleActions({
 	CHANGE_EMAIL: (state, {payload}) => {
@@ -102,8 +106,11 @@ const dataReducers = handleActions({
 			console.log('請輸入名稱 ', productName.value);
 		}
 
-		count.value = Number(count.value);
+		count.value = parseInt(count.value);
 		if(isNaN(count.value) || count.value <= 0) {
+			if(isNaN(count.value)) {
+				count.value = '';
+			}
 			passValidation = false;
 			count.errorText = '數量錯誤';
 			console.log('數量錯誤: ', count.value);
@@ -116,8 +123,11 @@ const dataReducers = handleActions({
 			console.log('單位錯誤 ', unit.value);
 		}
 
-		unitPrice.value = Number(unitPrice.value);
+		unitPrice.value = parseFloat(unitPrice.value);
 		if(isNaN(unitPrice.value) || unitPrice.value <= 0.0) {
+			if(isNaN(unitPrice.value)) {
+				unitPrice.value = '';
+			}
 			passValidation = false;
 			unitPrice.errorText = '單價錯誤';
 			console.log('單價錯誤: ', unitPrice.value);
@@ -135,16 +145,13 @@ const dataReducers = handleActions({
 			remark,
 		});
 
-		state = state.set('createEntity', createEntity);
-
-		if(passValidation) {
-
-		}
 		console.log(`passValidation: ${passValidation}`);
-
-
+		if(!passValidation) {
+			return state.set('createEntity', createEntity);
+		}
 
 		// if success reset new entity
+		state = state.set('createEntity', INIT_CREATE_ENTITY);
 		return state;
 	},
 

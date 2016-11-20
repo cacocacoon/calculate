@@ -1,4 +1,5 @@
 import React from 'react';
+import Divider from 'material-ui/Divider';
 import Modal from './Modal';
 import CreateEntityPanel from '../../containers/Panels/CreateEntity';
 class Editor extends React.Component {
@@ -18,6 +19,7 @@ class Editor extends React.Component {
 				{
 					//<PreviewReminder>
 				}
+				<Divider />
 				<CreateEntityPanel />
 			</Modal>
 		);

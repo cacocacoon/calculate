@@ -8,7 +8,7 @@ import IconButton from 'material-ui/IconButton';
 import ActionDone from 'material-ui/svg-icons/action/done';
 import {blue500} from 'material-ui/styles/colors';
 import InvertColors from 'material-ui/svg-icons/action/invert-colors';
-
+import {ENTITY} from '../../constants/CONST';
 class CreateEntity extends React.Component {
 
 	render() {
@@ -38,29 +38,31 @@ class CreateEntity extends React.Component {
 			<div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'flex-start'}}>
 				<Checkbox
 					defaultChecked={true}
+					value={type.value === ENTITY.getIn(['TYPE', 'DIESEL']) ? true : false}
 					onCheck={setType}
 					style={{width: 'initial', alignSelf: 'center', flexBasis: '30px'}}
 					checkedIcon={<InvertColors />}
 					/>
 
 				<DatePicker
-					onChange={setDate}
-					errorText={date.errorText}
 					floatingLabelText="日期"
 					floatingLabelFixed={true}
-					locale="zh-TW"
+					value={date.value === '' ? null : new Date(date.value)}
+					onChange={setDate}
 					formatDate={formatDate}
 					DateTimeFormat={dateTimFormat()}
+					locale="zh-TW"
 					autoOk={true}
 					style={{width: 'initial', flexBasis: '70px'}}
 					textFieldStyle={{width: '100%'}}
+					errorText={date.errorText}
 					/>
 
 				<SelectField
 					floatingLabelText="品名"
 					floatingLabelFixed={true}
-					onChange={setProductName}
 					value={productName.value}
+					onChange={setProductName}
 					errorText={productName.errorText}
 					style={{width: 'initial', flexBasis: '120px'}}
 					>
@@ -71,6 +73,7 @@ class CreateEntity extends React.Component {
 				<TextField
 					floatingLabelText="數量"
 					floatingLabelFixed={true}
+					value={count.value}
 					onChange={setCount}
 					errorText={count.errorText}
 					style={{width: 'initial', flexBasis: '70px'}}
@@ -79,8 +82,8 @@ class CreateEntity extends React.Component {
 				<SelectField
 					floatingLabelText="單位"
 					floatingLabelFixed={true}
-					onChange={setUnit}
 					value={unit.value}
+					onChange={setUnit}
 					errorText={unit.errorText}
 					style={{width: 'initial', flexBasis: '70px'}}
 					>
@@ -91,6 +94,7 @@ class CreateEntity extends React.Component {
 				<TextField
 					floatingLabelText="單價"
 					floatingLabelFixed={true}
+					value={unitPrice.value}
 					onChange={setUnitPrice}
 					errorText={unitPrice.errorText}
 					style={{width: 'initial', flexBasis: '70px'}}
@@ -99,6 +103,7 @@ class CreateEntity extends React.Component {
 				<TextField
 					floatingLabelText="備註"
 					floatingLabelFixed={true}
+					value={remark.value}
 					onChange={setRemark}
 					errorText={remark.errorText}
 					style={{width: 'initial', flexBasis: '70px'}}

@@ -1,5 +1,8 @@
 import Immutable from 'immutable';
-import {ENTITY} from '../constants/CONST';
+import {
+	ENTITY,
+	INIT_CREATE_ENTITY
+} from '../constants/CONST';
 
 export const UIState = Immutable.fromJS({
 	logIn: {
@@ -14,7 +17,7 @@ export const UIState = Immutable.fromJS({
 		open: true,
 	}
 });
-const DIESEL = ENTITY.getIn(['TYPE', 'DIESEL']);
+// const DIESEL = ENTITY.getIn(['TYPE', 'DIESEL']);
 export const dataState = Immutable.fromJS({
 	logIn: {
 		email: '',
@@ -26,35 +29,7 @@ export const dataState = Immutable.fromJS({
 		nameList: [],
 		errorText: '',
 	},
-	createEntity: {
-		type: {
-			value: DIESEL,
-			errorText: ''
-		},
-		date: {
-			value: '',
-			errorText: '',
-		},
-		productName: {
-			value: '超級柴油',
-			errorText: '',
-		},
-		count: {
-			value: '0',
-			errorText: '',
-		},
-		unit: {
-			value: 'L',
-			errorText: '',
-		},
-		unitPrice: {
-			value: '0.0',
-			errorText: '',
-		},
-		remark: {
-			value: '',
-			errorText: '',
-		},
-	}
+	createEntity: INIT_CREATE_ENTITY,
+
 
 });

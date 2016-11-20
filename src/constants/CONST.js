@@ -27,3 +27,34 @@ export const ENTITY = Immutable.fromJS({
 		LUB_OIL: '潤滑油'
 	}
 });
+
+export const INIT_CREATE_ENTITY = Immutable.fromJS({
+	type: {
+		value: ENTITY.getIn(['TYPE', 'DIESEL']),
+		errorText: ''
+	},
+	date: {
+		value: '',
+		errorText: '',
+	},
+	productName: {
+		value: '超級柴油',
+		errorText: '',
+	},
+	count: {
+		value: '',
+		errorText: '',
+	},
+	unit: {
+		value: 'L',
+		errorText: '',
+	},
+	unitPrice: {
+		value: '',
+		errorText: '',
+	},
+	remark: {
+		value: '',
+		errorText: '',
+	},
+});
