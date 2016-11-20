@@ -31,13 +31,13 @@ export default connect(
 			let value = isInputChecked ? DIESEL : LUB_OIL;
 			dispatch(setCreateEntityType({
 				value,
-				errorText: ''
+				// errorText: ''
 			}));
 		},
 		setDate: (none, date) => {
 			dispatch(setCreateEntityDate({
 				value: `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`,
-				errorText: '',
+				// errorText: '',
 			}));
 		},
 		dateTimFormat: () => (
@@ -49,31 +49,31 @@ export default connect(
 		setProductName: (event, key, value) => {
 			dispatch(setCreateEntityProductName({
 				value,
-				errorText: '',
+				// errorText: '',
 			}));
 		},
 		setCount: (event) => {
 			dispatch(setCreateEntityCount({
 				value: event.target.value,
-				errorText: '',
+				// errorText: '',
 			}));
 		},
 		setUnit: (event, key, value) => {
 			dispatch(setCreateEntityUnit({
 				value,
-				errorText: '',
+				// errorText: '',
 			}));
 		},
 		setUnitPrice: (event) => {
 			dispatch(setCreateEntityUnitPrice({
 				value: event.target.value,
-				errorText: '',
+				// errorText: '',
 			}));
 		},
 		setRemark: (event) => {
 			dispatch(setCreateEntityRemark({
 				value: event.target.value,
-				errorText: '',
+				// errorText: '',
 			}));
 		},
 		pushNewEntity: () => {

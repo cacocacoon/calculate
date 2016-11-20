@@ -31,30 +31,30 @@ export const ENTITY = Immutable.fromJS({
 export const INIT_CREATE_ENTITY = Immutable.fromJS({
 	type: {
 		value: ENTITY.getIn(['TYPE', 'DIESEL']),
-		errorText: ''
+		// errorText: ''
 	},
 	date: {
 		value: '',
-		errorText: '',
+		// errorText: '',
 	},
 	productName: {
 		value: '超級柴油',
-		errorText: '',
+		// errorText: '',
 	},
 	count: {
 		value: '',
-		errorText: '',
+		// errorText: '',
 	},
 	unit: {
 		value: 'L',
-		errorText: '',
+		// errorText: '',
 	},
 	unitPrice: {
 		value: '',
-		errorText: '',
+		// errorText: '',
 	},
 	remark: {
 		value: '',
-		errorText: '',
+		// errorText: '',
 	},
 });
