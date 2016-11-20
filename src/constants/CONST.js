@@ -21,6 +21,7 @@ export const STEPPER_INIT_STATE = Immutable.fromJS({
 });
 
 export const ENTITY = Immutable.fromJS({
+	//商品類型
 	TYPE: {
 		DIESEL: '超級柴油',
 		LUB_OIL: '潤滑油'

@@ -2,7 +2,7 @@ import Immutable from 'immutable';
 import {handleActions} from 'redux-actions';
 import {dataState} from '../../constants/models';
 
-import {STEPPER_INIT_STATE} from '../../constants/CONST';
+import {STEPPER_INIT_STATE, ENTITY} from '../../constants/CONST';
 // NOTE: state 設定好資料記得要 return 才能真正修改 state
 const dataReducers = handleActions({
 	CHANGE_EMAIL: (state, {payload}) => {
@@ -66,9 +66,84 @@ const dataReducers = handleActions({
 	},
 
 	PUSH_NEW_ENTITY: (state) => {
-		let createEntity = state.get('createEntity');
+		let passValidation = true;
 
-		let type = createEntity
+		let {
+			type,
+			date,
+			productName,
+			count,
+			unit,
+			unitPrice,
+			remark,
+		} = state.get('createEntity').toJS();
+
+		const types = Object.values(ENTITY.get('TYPE').toJS());
+		//value 不存在 或不是預先定義好的類型就要設定errorText
+		type.value = type.value.trim();
+		if(!type.value || !types.includes(type.value)) {
+			passValidation = false;
+			type.errorText = '商品類型錯誤';
+			console.log('商品類型錯誤: ', type.value);
+		}
+
+		// REVIEW: 日期目前只暫時檢查是否為空
+		date.value = date.value.trim();
+		if(!date.value) {
+			passValidation = false;
+			date.errorText = '請選擇日期';
+			console.log('請選擇日期 ', date.value);
+		}
+
+		productName.value = productName.value.trim();
+		if(!productName.value) {
+			passValidation = false;
+			productName.errorText = '請輸入品名';
+			console.log('請輸入名稱 ', productName.value);
+		}
+
+		count.value = Number(count.value);
+		if(isNaN(count.value) || count.value <= 0) {
+			passValidation = false;
+			count.errorText = '數量錯誤';
+			console.log('數量錯誤: ', count.value);
+		}
+
+		unit.value = unit.value.trim();
+		if(!unit.value) {
+			passValidation = false;
+			unit.errorText = '單位錯誤';
+			console.log('單位錯誤 ', unit.value);
+		}
+
+		unitPrice.value = Number(unitPrice.value);
+		if(isNaN(unitPrice.value) || unitPrice.value <= 0.0) {
+			passValidation = false;
+			unitPrice.errorText = '單價錯誤';
+			console.log('單價錯誤: ', unitPrice.value);
+		}
+
+		remark.value = remark.value.trim();
+
+		let createEntity = Immutable.fromJS({
+			type,
+			date,
+			productName,
+			count,
+			unit,
+			unitPrice,
+			remark,
+		});
+
+		state = state.set('createEntity', createEntity);
+
+		if(passValidation) {
+
+		}
+		console.log(`passValidation: ${passValidation}`);
+
+
+
 		// if success reset new entity
 		return state;
 	},

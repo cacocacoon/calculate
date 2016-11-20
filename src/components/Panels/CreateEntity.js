@@ -13,13 +13,15 @@ class CreateEntity extends React.Component {
 
 	render() {
 		const {
-			// type,
-			// date,
+			//variable from state
+			type,
+			date,
 			productName,
-			// count,
+			count,
 			unit,
-			// unitPrice,
-			// remark,
+			unitPrice,
+			remark,
+			//function
 			setType,
 			setDate,
 			setProductName,
@@ -31,17 +33,19 @@ class CreateEntity extends React.Component {
 			formatDate,
 			pushNewEntity,
 		} = this.props;
+
 		return (
-			<div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center'}}>
+			<div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'flex-start'}}>
 				<Checkbox
 					defaultChecked={true}
 					onCheck={setType}
-					style={{width: 'initial', flexBasis: '30px'}}
+					style={{width: 'initial', alignSelf: 'center', flexBasis: '30px'}}
 					checkedIcon={<InvertColors />}
 					/>
 
 				<DatePicker
 					onChange={setDate}
+					errorText={date.errorText}
 					floatingLabelText="日期"
 					floatingLabelFixed={true}
 					locale="zh-TW"
@@ -57,6 +61,7 @@ class CreateEntity extends React.Component {
 					floatingLabelFixed={true}
 					onChange={setProductName}
 					value={productName.value}
+					errorText={productName.errorText}
 					style={{width: 'initial', flexBasis: '120px'}}
 					>
 					<MenuItem value="超級柴油" primaryText="超級柴油" />
@@ -64,9 +69,10 @@ class CreateEntity extends React.Component {
 				</SelectField>
 
 				<TextField
-					onChange={setCount}
 					floatingLabelText="數量"
 					floatingLabelFixed={true}
+					onChange={setCount}
+					errorText={count.errorText}
 					style={{width: 'initial', flexBasis: '70px'}}
 					/>
 
@@ -75,6 +81,7 @@ class CreateEntity extends React.Component {
 					floatingLabelFixed={true}
 					onChange={setUnit}
 					value={unit.value}
+					errorText={unit.errorText}
 					style={{width: 'initial', flexBasis: '70px'}}
 					>
 					<MenuItem value="L" primaryText="L" />
@@ -82,16 +89,18 @@ class CreateEntity extends React.Component {
 				</SelectField>
 
 				<TextField
-					onChange={setUnitPrice}
 					floatingLabelText="單價"
 					floatingLabelFixed={true}
+					onChange={setUnitPrice}
+					errorText={unitPrice.errorText}
 					style={{width: 'initial', flexBasis: '70px'}}
 					/>
 
 				<TextField
-					onChange={setRemark}
 					floatingLabelText="備註"
 					floatingLabelFixed={true}
+					onChange={setRemark}
+					errorText={remark.errorText}
 					style={{width: 'initial', flexBasis: '70px'}}
 					/>
 

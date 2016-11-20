@@ -15,13 +15,13 @@ import {
 
 export default connect(
 	(state) => ({
-		// type: {value: true},
-		// date: {value: ''},
+		type: state.getIn(['data', 'createEntity', 'type']).toJS(),
+		date: state.getIn(['data', 'createEntity', 'date']).toJS(),
 		productName: state.getIn(['data', 'createEntity', 'productName']).toJS(),
-		// count: {value: 0},
+		count: state.getIn(['data', 'createEntity', 'count']).toJS(),
 		unit: state.getIn(['data', 'createEntity', 'unit']).toJS(),
-		// unitPrice: {value: 0.0},
-		// remark: {value: ''},
+		unitPrice: state.getIn(['data', 'createEntity', 'unitPrice']).toJS(),
+		remark: state.getIn(['data', 'createEntity', 'remark']).toJS(),
 	}),
 
 	(dispatch) => ({
@@ -36,7 +36,7 @@ export default connect(
 		},
 		setDate: (none, date) => {
 			dispatch(setCreateEntityDate({
-				date: `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`,
+				value: `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`,
 				errorText: '',
 			}));
 		},

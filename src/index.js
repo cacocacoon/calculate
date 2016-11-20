@@ -1,3 +1,5 @@
+'use strict';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
@@ -6,7 +8,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import store from './store';
 import Main from './components/Main/Main';
 
-'use strict';
 injectTapEventPlugin();
 
 const App = () => (
