@@ -1,21 +1,23 @@
 import {connect} from 'react-redux';
 import CreateEntityPanel from '../../components/Panels/CreateEntity';
+import {ENTITY} from '../../constants/CONST';
 
 import {
 	setCreateEntityType,
 	setCreateEntityDate,
-	setCreateEntityProduct,
+	setCreateEntityProductName,
 	setCreateEntityCount,
 	setCreateEntityUnit,
 	setCreateEntityUnitPrice,
 	setCreateEntityRemark,
+	pushNewEntity
 } from '../../actions';
 
 export default connect(
 	(state) => ({
 		// type: {value: true},
 		// date: {value: ''},
-		product: state.getIn(['data', 'createEntity', 'product']).toJS(),
+		productName: state.getIn(['data', 'createEntity', 'productName']).toJS(),
 		// count: {value: 0},
 		unit: state.getIn(['data', 'createEntity', 'unit']).toJS(),
 		// unitPrice: {value: 0.0},
@@ -24,19 +26,13 @@ export default connect(
 
 	(dispatch) => ({
 		setType: (event, isInputChecked) => {
-			if(isInputChecked) {
-				dispatch(setCreateEntityType({
-					value: 'DIESEL',
-					errorText: ''
-				}));
-			}
-			else {
-				dispatch(setCreateEntityType({
-					value: 'LUB_OIL',
-					errorText: ''
-				}));
-			}
-			// NOTE: type 不需要 errorText?
+			const DIESEL = ENTITY.getIn(['TYPE', 'DIESEL']);
+			const LUB_OIL = ENTITY.getIn(['TYPE', 'LUB_OIL']);
+			let value = isInputChecked ? DIESEL : LUB_OIL;
+			dispatch(setCreateEntityType({
+				value,
+				errorText: ''
+			}));
 		},
 		setDate: (none, date) => {
 			dispatch(setCreateEntityDate({
@@ -50,15 +46,15 @@ export default connect(
 		formatDate: (date) => (
 			`${date.getMonth() + 1}/${date.getDate()}`
 		),
-		setProduct: (event, key, value) => {
-			dispatch(setCreateEntityProduct({
+		setProductName: (event, key, value) => {
+			dispatch(setCreateEntityProductName({
 				value,
 				errorText: '',
 			}));
 		},
 		setCount: (event) => {
 			dispatch(setCreateEntityCount({
-				count: event.target.value,
+				value: event.target.value,
 				errorText: '',
 			}));
 		},
@@ -70,16 +66,18 @@ export default connect(
 		},
 		setUnitPrice: (event) => {
 			dispatch(setCreateEntityUnitPrice({
-				unitPrice: event.target.value,
+				value: event.target.value,
 				errorText: '',
 			}));
 		},
 		setRemark: (event) => {
 			dispatch(setCreateEntityRemark({
-				remark: event.target.value,
+				value: event.target.value,
 				errorText: '',
 			}));
 		},
-
+		pushNewEntity: () => {
+			dispatch(pushNewEntity());
+		}
 	}),
 )(CreateEntityPanel);

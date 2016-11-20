@@ -19,3 +19,10 @@ export const STEPPER_INIT_STATE = Immutable.fromJS({
 		errorText: '',
 	}
 });
+
+export const ENTITY = Immutable.fromJS({
+	TYPE: {
+		DIESEL: '超級柴油',
+		LUB_OIL: '潤滑油'
+	}
+});

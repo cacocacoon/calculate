@@ -15,20 +15,21 @@ class CreateEntity extends React.Component {
 		const {
 			// type,
 			// date,
-			product,
+			productName,
 			// count,
 			unit,
 			// unitPrice,
 			// remark,
 			setType,
 			setDate,
-			setProduct,
+			setProductName,
 			setCount,
 			setUnit,
 			setUnitPrice,
 			setRemark,
 			dateTimFormat,
 			formatDate,
+			pushNewEntity,
 		} = this.props;
 		return (
 			<div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center'}}>
@@ -54,8 +55,8 @@ class CreateEntity extends React.Component {
 				<SelectField
 					floatingLabelText="品名"
 					floatingLabelFixed={true}
-					onChange={setProduct}
-					value={product.value}
+					onChange={setProductName}
+					value={productName.value}
 					style={{width: 'initial', flexBasis: '120px'}}
 					>
 					<MenuItem value="超級柴油" primaryText="超級柴油" />
@@ -95,8 +96,11 @@ class CreateEntity extends React.Component {
 					/>
 
 				<IconButton
+					onTouchTap={pushNewEntity}
 					style={{width: 'initial', height: '80px', flexBasis: '80px'}}
 					iconStyle={{width: '30px', height: '30px'}}
+					tooltip="新增"
+					touch={true}
 					>
 					<ActionDone color={"#00bcd4"} />
 				</IconButton>

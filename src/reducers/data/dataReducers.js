@@ -45,8 +45,8 @@ const dataReducers = handleActions({
 		return state.setIn(['createEntity', 'date'], Immutable.fromJS(payload));
 	},
 
-	SET_CREATE_ENTITY_PRODUCT: (state, {payload}) => {
-		return state.setIn(['createEntity', 'product'], Immutable.fromJS(payload));
+	SET_CREATE_ENTITY_PRODUCT_NAME: (state, {payload}) => {
+		return state.setIn(['createEntity', 'productName'], Immutable.fromJS(payload));
 	},
 
 	SET_CREATE_ENTITY_COUNT: (state, {payload}) => {
@@ -57,12 +57,20 @@ const dataReducers = handleActions({
 		return state.setIn(['createEntity', 'unit'], Immutable.fromJS(payload));
 	},
 
-	SET_CREATE_ENTITY_UNITPRICE: (state, {payload}) => {
+	SET_CREATE_ENTITY_UNIT_PRICE: (state, {payload}) => {
 		return state.setIn(['createEntity', 'unitPrice'], Immutable.fromJS(payload));
 	},
 
 	SET_CREATE_ENTITY_REMARK: (state, {payload}) => {
 		return state.setIn(['createEntity', 'remark'], Immutable.fromJS(payload));
+	},
+
+	PUSH_NEW_ENTITY: (state) => {
+		let createEntity = state.get('createEntity');
+
+		let type = createEntity
+		// if success reset new entity
+		return state;
 	},
 
 }, dataState);

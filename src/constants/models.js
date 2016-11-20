@@ -1,5 +1,5 @@
 import Immutable from 'immutable';
-
+import {ENTITY} from '../constants/CONST';
 
 export const UIState = Immutable.fromJS({
 	logIn: {
@@ -14,7 +14,7 @@ export const UIState = Immutable.fromJS({
 		open: true,
 	}
 });
-
+const DIESEL = ENTITY.getIn(['TYPE', 'DIESEL']);
 export const dataState = Immutable.fromJS({
 	logIn: {
 		email: '',
@@ -28,14 +28,14 @@ export const dataState = Immutable.fromJS({
 	},
 	createEntity: {
 		type: {
-			value: 'DIESEL',
+			value: DIESEL,
 			errorText: ''
 		},
 		date: {
 			value: '',
 			errorText: '',
 		},
-		product: {
+		productName: {
 			value: '超級柴油',
 			errorText: '',
 		},
