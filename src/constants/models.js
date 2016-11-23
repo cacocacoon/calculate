@@ -1,7 +1,8 @@
 import Immutable from 'immutable';
 import {
 	ENTITY,
-	INIT_CREATE_ENTITY
+	INIT_CREATE_ENTITY,
+	INIT_REMINDER,
 } from '../constants/CONST';
 
 export const UIState = Immutable.fromJS({
@@ -29,6 +30,7 @@ export const dataState = Immutable.fromJS({
 		nameList: [],
 		errorText: '',
 	},
+	previewReminder: INIT_REMINDER,
 	createEntity: INIT_CREATE_ENTITY,
 
 

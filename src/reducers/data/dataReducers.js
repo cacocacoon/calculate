@@ -1,6 +1,7 @@
 import Immutable from 'immutable';
 import {handleActions} from 'redux-actions';
 import {dataState} from '../../constants/models';
+import {BillingReminder, BillingEntity} from '../../constants/dataStructure';
 
 import {
 	STEPPER_INIT_STATE,
@@ -135,23 +136,49 @@ const dataReducers = handleActions({
 
 		remark.value = remark.value.trim();
 
-		let createEntity = Immutable.fromJS({
-			type,
-			date,
-			productName,
-			count,
-			unit,
-			unitPrice,
-			remark,
-		});
-
 		console.log(`passValidation: ${passValidation}`);
 		if(!passValidation) {
+			let createEntity = Immutable.fromJS({
+				type,
+				date,
+				productName,
+				count,
+				unit,
+				unitPrice,
+				remark,
+			});
+
 			return state.set('createEntity', createEntity);
 		}
 
 		// if success reset new entity
 		state = state.set('createEntity', INIT_CREATE_ENTITY);
+
+		//editor panel 輸入潤滑油的單價都是未稅, 要轉換成含稅再去計算
+		if(type.value === ENTITY.get('LUB_OIL')) {
+			unitPrice.value = unitPrice.value * 1.05;
+		}
+
+		let newBilling = BillingEntity.fromState({
+			type: type.value,
+			date: date.value,
+			productName: productName.value,
+			count: count.value,
+			unit: unit.value,
+			unitPrice: unitPrice.value,
+			remark: remark.value,
+		});
+		//把修改中的明細表抓出來
+		let previewReminderState = state.get('previewReminder').toJS();
+		// 轉換成具有計算明細表功能的物件
+		let billingReminder = BillingReminder.fromState(previewReminderState);
+		// 把新的 billing 加入明細表物件裡面
+		billingReminder.push(newBilling);
+		// 計算明細表
+		billingReminder.calculate();
+		// 轉換成 plain object, 存回去state
+		previewReminderState = billingReminder.toState();
+		state = state.set('previewReminder', Immutable.fromJS(previewReminderState));
 		return state;
 	},
 
