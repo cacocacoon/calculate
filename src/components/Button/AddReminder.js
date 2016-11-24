@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
-class Button extends Component {
+class AddReminderButton extends Component {
 
 	render() {
 		const {
@@ -14,7 +14,7 @@ class Button extends Component {
 				<FloatingActionButton
 					secondary={true}
 					style={{position: 'fixed', bottom: '20px', right: '20px'}}
-					onTouchTap={openEditor}
+					onTouchTap={openEditor(this.context)}
 					>
 					<ContentAdd />
 				</FloatingActionButton>
@@ -23,4 +23,8 @@ class Button extends Component {
 	}
 }
 
-export default Button;
+AddReminderButton.contextTypes = {
+	store: React.PropTypes.object
+};
+
+export default AddReminderButton;
