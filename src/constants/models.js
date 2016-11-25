@@ -15,7 +15,7 @@ export const UIState = Immutable.fromJS({
 		step: 0,
 	},
 	reminderEditor: {
-		open: true,
+		open: false,
 	}
 });
 // const DIESEL = ENTITY.getIn(['TYPE', 'DIESEL']);
