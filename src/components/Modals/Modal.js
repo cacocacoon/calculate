@@ -3,6 +3,8 @@ import Dialog from 'material-ui/Dialog';
 
 class Modal extends React.Component {
 
+
+
 	render() {
 		// title(string): modal title
 		// actions(array): modal 下方要放的元件
@@ -14,6 +16,7 @@ class Modal extends React.Component {
 			actions,
 			open,
 			contentStyle,
+			titleStyle,
 			children
 		} = this.props;
 
@@ -24,6 +27,7 @@ class Modal extends React.Component {
 					actions={actions}
 					modal={true}
 					open={open}
+					titleStyle={titleStyle}
 					contentStyle={contentStyle}
 					>
 					{children}
