@@ -34,7 +34,7 @@ export const INIT_CREATE_ENTITY = Immutable.fromJS({
 		// errorText: ''
 	},
 	date: {
-		value: '',
+		value: '2016/1/1',
 		// errorText: '',
 	},
 	productName: {
@@ -42,7 +42,7 @@ export const INIT_CREATE_ENTITY = Immutable.fromJS({
 		// errorText: '',
 	},
 	count: {
-		value: '',
+		value: '132',
 		// errorText: '',
 	},
 	unit: {
@@ -50,11 +50,11 @@ export const INIT_CREATE_ENTITY = Immutable.fromJS({
 		// errorText: '',
 	},
 	unitPrice: {
-		value: '',
+		value: '12',
 		// errorText: '',
 	},
 	remark: {
-		value: '',
+		value: 'swdfe',
 		// errorText: '',
 	},
 });
