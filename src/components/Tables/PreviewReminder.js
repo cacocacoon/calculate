@@ -68,11 +68,11 @@ class PreviewReminder extends React.Component {
 		return (
 			<div style={this.containerStyle}>
 				<div>
-					<h1 style={{textAlign: 'center'}}>海有股份有限公司</h1>
+					<h1 style={{textAlign: 'center', marginBottom: '0.1cm'}}>海有股份有限公司</h1>
 					<h3 style={{margin: 0, textAlign: 'center'}}>請款明細表</h3>
 				</div>
 				<div style={{alignSelf: 'flex-start'}}>
-					<h4>客戶名稱：Costco 好事多有限公司</h4>
+					<h4 style={{margin: '0.3cm 0'}}>客戶名稱：Costco 好事多有限公司</h4>
 				</div>
 				<div style={this.tableStyle}>
 					<div style={this.columnStyle}>

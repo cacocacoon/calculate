@@ -25,6 +25,7 @@ class Modal extends React.Component {
 				<Dialog
 					title={title}
 					actions={actions}
+					autoScrollBodyContent={true}
 					modal={true}
 					open={open}
 					titleStyle={titleStyle}
