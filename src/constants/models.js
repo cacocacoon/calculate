@@ -32,6 +32,6 @@ export const dataState = Immutable.fromJS({
 	},
 	previewReminder: INIT_REMINDER,
 	createEntity: INIT_CREATE_ENTITY,
-
+	
 
 });
