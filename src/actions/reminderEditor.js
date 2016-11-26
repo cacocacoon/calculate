@@ -11,6 +11,7 @@ import {
 	SET_CREATE_ENTITY_UNIT_PRICE,
 	SET_CREATE_ENTITY_REMARK,
 	PUSH_NEW_ENTITY,
+	SET_PREVIEW_REMINDER,
 } from '../constants/actionTypes';
 
 export const openReminderEditor = createAction(OPEN_REMINDER_EDITOR);
@@ -23,3 +24,4 @@ export const setCreateEntityUnit = createAction(SET_CREATE_ENTITY_UNIT);
 export const setCreateEntityUnitPrice = createAction(SET_CREATE_ENTITY_UNIT_PRICE);
 export const setCreateEntityRemark = createAction(SET_CREATE_ENTITY_REMARK);
 export const pushNewEntity = createAction(PUSH_NEW_ENTITY);
+export const setPreviewReminder = createAction(SET_PREVIEW_REMINDER);

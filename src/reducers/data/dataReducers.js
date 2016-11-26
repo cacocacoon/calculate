@@ -179,7 +179,12 @@ const dataReducers = handleActions({
 		// 轉換成 plain object, 存回去state
 		previewReminderState = billingReminder.toState();
 		state = state.set('previewReminder', Immutable.fromJS(previewReminderState));
+
 		return state;
+	},
+
+	SET_PREVIEW_REMINDER: (state, {payload}) => {
+		return state.set('previewReminder', payload.previewReminder);
 	},
 
 }, dataState);

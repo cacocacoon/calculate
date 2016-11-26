@@ -37,6 +37,7 @@ export const logInFireBase = (email, password) => {
 }
 
 const reminderListTableRef = fbDatabase.ref('reminderListTable');
+let reminderListRef = null;
 
 export const getReminderListNameListFromFirebase = () => (dispatch) => {
 	reminderListTableRef.on('value', (snapShot) => {
@@ -51,50 +52,63 @@ export const getReminderListNameListFromFirebase = () => (dispatch) => {
 
 export const createReminderList = (name = '') => (dispatch) => {
 	if(Boolean((typeof name === "string") && !name)) {
-		throw new Error('輸入名稱不正確');
+		throw new Error('輸入名稱不正確(這個問題目前還不重要，但要記得回來解決)');
 	}
 	const emptyReminderList = {
 		name,
 		// list: 'empty',
 	};
-	const reminderListRef = reminderListTableRef.child(name);
+	reminderListRef = reminderListTableRef.child(name);
 	reminderListRef.set(emptyReminderList)
 	.then(() => {
-		console.log('在firebase新增檔案成功: ', emptyReminderList);
-		// 監聽 firebase 上 reminderlist 任何變動
-		listenToRefOnChildChanged(reminderListRef);
-		console.log('開始監聽明細表任何變動');
-		// dispatch(setReminderList(emptyReminderList));
+		console.log(`在 firebase 新增成功: reminderList.${reminderListRef.key}`, emptyReminderList);
+		keepSyncingReminderList(dispatch, reminderListRef);
 	})
 	.catch((error) => {
-		throw new Error('在firebase新增檔案失敗');
+		throw new Error(`在firebase新增失敗: reminderList.${name}`);
 	});
-
-
 };
+
 
 export const fetchReminderList = (name = '') => (dispatch) => {
 	if(Boolean((typeof name === "string") && !name)) {
 		throw new Error('輸入名稱不正確');
 	}
-	const reminderListRef = reminderListTableRef.child(name);
-	reminderListRef.once('value', (snapShot) => {
-		const reminderList = snapShot.val();
-		if(!reminderList) {
-			throw new Error('在firebase抓取檔案失敗');
-		}
-		console.log('在firebase抓取檔案成功: ', reminderList);
 
-		console.log('開始監聽明細表任何變動');
-		dispatch(setReminderList(reminderList));
-	});
+	reminderListRef = reminderListTableRef.child(name);
+	keepSyncingReminderList(dispatch, reminderListRef);
 };
 
-export const pushNewReminder = ({newReminder, reminderList}) => (dispatch) => {
+export const pushNewReminder = (newReminder = null) => (dispatch) => {
 	if(!newReminder) {
-		throw new Error('can not find new reminder.');
+		console.log('要推上去到firebase的reminder是沒有東西的');
+		return ;
 	}
 
-	const reminderListRef = reminderListTableRef.child(reminderList.name);
-	reminderListRef.child('list').push(newReminder);
+	if(!reminderListRef) {
+		console.log('還沒有選取要新增還是修改明細表');
+		return ;
+	}
+
+	reminderListRef.push(newReminder)
+		.then(() => {
+			console.log(`推送到 firebase reminderList.${reminderListRef.key} 成功`);
+		})
+		.catch(() => {
+			console.log(`推送到 firebase reminderList.${reminderListRef.key} 失敗`);
+		});
+}
+
+// state裡面的reminderlist 和 firebase 裡的 reminderlist 保持同步
+const keepSyncingReminderList = (dispatch, reminderListRef) => {
+	// 當 firebase ref 上有檔案更動，便會執行下面
+	reminderListRef.on('value', (snapShot) => {
+		const reminderList = snapShot.val();
+		if(!reminderList) {
+			throw new Error(`與 firebase reminderList.${reminderListRef.key} 同步失敗`);
+		}
+
+		dispatch(setReminderList(reminderList));
+		console.log(`與 firebase reminderList.${reminderListRef.key} 同步成功`);
+	});
 }
