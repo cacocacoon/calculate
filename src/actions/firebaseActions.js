@@ -90,7 +90,7 @@ export const pushNewReminder = (newReminder = null) => (dispatch) => {
 		return ;
 	}
 
-	reminderListRef.push(newReminder)
+	reminderListRef.child('list').push(newReminder)
 		.then(() => {
 			console.log(`推送到 firebase reminderList.${reminderListRef.key} 成功`);
 		})

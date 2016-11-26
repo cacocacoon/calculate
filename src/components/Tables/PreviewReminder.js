@@ -53,6 +53,7 @@ class PreviewReminder extends React.Component {
 
 	render() {
 		const {
+			companyName,
 			entities,
 			totalPriceExcludedTax,
 			totalTax,
@@ -87,7 +88,7 @@ class PreviewReminder extends React.Component {
 					{
 						entities.map((entity, index) => {
 							const date = new Date(entity.date);
-							entity.date = `${date.getMonth()}/${date.getDate()}`;
+							entity.date = `${date.getMonth() + 1}/${date.getDate()}`;
 							entity.price = Math.round(entity.price);
 
 							return (
