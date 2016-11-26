@@ -35,7 +35,7 @@ class CreateEntity extends React.Component {
 		} = this.props;
 
 		return (
-			<div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'flex-start'}}>
+			<div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'flex-start', textAlign: 'initial'}}>
 				<Checkbox
 					defaultChecked={true}
 					value={type.value === ENTITY.getIn(['TYPE', 'DIESEL']) ? true : false}

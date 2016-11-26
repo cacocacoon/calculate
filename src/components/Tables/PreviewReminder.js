@@ -62,7 +62,14 @@ class PreviewReminder extends React.Component {
 
 		// 沒有東西就不用render元件
 		if(entities.length == 0) {
-			return null;
+			const textStyle = {
+				textAlign: 'center',
+				marginTop: '18px',
+				fontSize: '25px',
+				fontWeight: 'bold',
+				color: 'lightgrey',
+			};
+			return <div style={textStyle}>空的</div>;
 		}
 
 		return (

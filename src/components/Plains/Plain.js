@@ -15,10 +15,11 @@ class Plain extends React.Component {
 		};
 
 		this.textStyle = {
+			marginTop: '70px',
 			textAlign: 'center',
-			fontSize: '1.5cm',
+			fontSize: '45px',
 			fontWeight: 'bold',
-			color: 'grey',
+			color: 'gray',
 		};
 	}
 

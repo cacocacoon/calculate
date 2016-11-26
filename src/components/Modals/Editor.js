@@ -32,15 +32,13 @@ class Editor extends React.Component {
 		return (
 			<Modal
 				title="編輯器"
-				actions={[<CreateEntityPanel />, <SaveButton />]}
+				titleStyle={{padding: '12px 25px 12px', borderBottom: '0px'}}
 				open={open}
-				contentStyle={{overflow: 'auto', width: '800px', maxWidth: '800px', maxHeight: '100%'}}
+				contentStyle={{width: '800px', maxWidth: '800px'}}
+				actions={[<CreateEntityPanel />, <SaveButton />]}
+				actionsContainerStyle={{}}
 				>
-				{
-				}
 				<PreviewReminderTable />
-				<Divider />
-
 			</Modal>
 		);
 	}
