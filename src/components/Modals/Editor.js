@@ -32,7 +32,7 @@ class Editor extends React.Component {
 		return (
 			<Modal
 				title="編輯器"
-				actions={[<SaveButton />]}
+				actions={[<CreateEntityPanel />, <SaveButton />]}
 				open={open}
 				contentStyle={{overflow: 'auto', width: '800px', maxWidth: '800px', maxHeight: '100%'}}
 				>
@@ -40,7 +40,7 @@ class Editor extends React.Component {
 				}
 				<PreviewReminderTable />
 				<Divider />
-				<CreateEntityPanel />
+
 			</Modal>
 		);
 	}
