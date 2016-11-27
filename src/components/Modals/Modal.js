@@ -15,9 +15,12 @@ class Modal extends React.Component {
 			title,
 			actions,
 			open,
+			modal,
 			contentStyle,
 			titleStyle,
-			children
+			bodyStyle,
+			children,
+			onRequestClose,
 		} = this.props;
 
 		return (
@@ -26,10 +29,11 @@ class Modal extends React.Component {
 					title={title}
 					actions={actions}
 					autoScrollBodyContent={true}
-					modal={true}
+					modal={modal}
 					open={open}
 					titleStyle={titleStyle}
 					contentStyle={contentStyle}
+					onRequestClose={onRequestClose}
 					>
 					{children}
 				</Dialog>

@@ -187,6 +187,13 @@ const dataReducers = handleActions({
 		return state.set('previewReminder', payload.previewReminder);
 	},
 
+	SET_PREVIEW_REMINDER_CAMPANY_NAME: (state, {payload}) => {
+		return state.setIn(['previewReminder', 'companyName'], payload.name);
+	},
+	SET_PREVIEW_REMINDER_CAMPANY_NAME: (state, {payload}) => {
+		return state.setIn(['previewReminder', 'companyName'], payload.name);
+	},
+
 }, dataState);
 
 export default dataReducers;

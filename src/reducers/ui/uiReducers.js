@@ -45,6 +45,10 @@ const uiReducers = handleActions({
 		return state.setIn(['reminderEditor', 'open'], false);
 	},
 
+	SET_PREVIEW_COMPANYNAME_INPUT_ERRORTEXT: (state, {payload}) => {
+		return state.setIn(['previewReminder', 'companyNameInputErrorText'], payload.errorText);
+	},
+
 }, UIState);
 
 export default uiReducers;

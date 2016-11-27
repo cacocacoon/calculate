@@ -16,12 +16,30 @@ export default connect(
 
 	(dispatch) => ({
 		save: (context) => () => {
+			if(!confirm('確定改好了嗎?')) {
+				return ;
+			}
 			const data = context.store.getState().get('data').toJS();
 			const previewReminder = data.previewReminder;
+			try {
+				dispatch(pushNewReminder(previewReminder));
+				dispatch(setPreviewReminder({previewReminder: INIT_REMINDER}));
+				dispatch(closeReminderEditor());
+			}
+			catch(action) {
+				dispatch(action);
+			}
+			finally {
 
-			dispatch(pushNewReminder(previewReminder));
-			dispatch(setPreviewReminder({previewReminder: INIT_REMINDER}));
+			}
+		},
+
+		closeEditorModal: () => {
 			dispatch(closeReminderEditor());
+		},
+
+		cleanPreviewReminder: () => {
+			dispatch(setPreviewReminder({previewReminder: INIT_REMINDER}));
 		},
 	}),
 )(EditorModal);

@@ -1,7 +1,8 @@
 import React from 'react';
+import createFragment from 'react-addons-create-fragment';
+import TextField from 'material-ui/TextField';
 
 class PreviewReminder extends React.Component {
-
 
 	constructor() {
 		super();
@@ -53,11 +54,14 @@ class PreviewReminder extends React.Component {
 
 	render() {
 		const {
+			previewMode,
+			setCompanyName,
 			companyName,
 			entities,
 			totalPriceExcludedTax,
 			totalTax,
 			totalPrice,
+			companyNameInputErrorText,
 		} = this.props;
 
 		// 沒有東西就不用render元件
@@ -78,8 +82,15 @@ class PreviewReminder extends React.Component {
 					<h1 style={{textAlign: 'center', marginBottom: '0.1cm'}}>海有股份有限公司</h1>
 					<h3 style={{margin: 0, textAlign: 'center'}}>請款明細表</h3>
 				</div>
-				<div style={{alignSelf: 'flex-start'}}>
-					<h4 style={{margin: '0.3cm 0'}}>客戶名稱：Costco 好事多有限公司</h4>
+				<div key={previewMode} style={{alignSelf: 'flex-start'}}>
+					{
+						// <CompanyNameElement key={previewMode} previewMode={previewMode} />
+						previewMode ? (
+							<div key={previewMode}>客戶名稱：<TextField id="company-name-input" onChange={setCompanyName} errorText={companyNameInputErrorText} /></div>
+						) : (
+							<h4 key={previewMode} style={{margin: '0.3cm 0'}}>客戶名稱：{companyName}</h4>
+						)
+					}
 				</div>
 				<div style={this.tableStyle}>
 					<div style={this.columnStyle}>

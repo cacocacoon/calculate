@@ -16,7 +16,10 @@ export const UIState = Immutable.fromJS({
 	},
 	reminderEditor: {
 		open: false,
-	}
+	},
+	previewReminder: {
+		companyNameInputErrorText: '',
+	},
 });
 // const DIESEL = ENTITY.getIn(['TYPE', 'DIESEL']);
 export const dataState = Immutable.fromJS({
@@ -32,6 +35,6 @@ export const dataState = Immutable.fromJS({
 	},
 	previewReminder: INIT_REMINDER,
 	createEntity: INIT_CREATE_ENTITY,
-	
+
 
 });

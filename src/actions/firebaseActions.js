@@ -11,6 +11,7 @@ import {
 
 	setReminderListNameList,
 	setReminderList,
+	setPreviewCompanyNameInputErrorText,
 } from '../actions';
 
 // NOTE: async action
@@ -80,14 +81,19 @@ export const fetchReminderList = (name = '') => (dispatch) => {
 };
 
 export const pushNewReminder = (newReminder = null) => (dispatch) => {
+	if(!reminderListRef) {
+		console.log('還沒有選取要新增還是修改明細表');
+		return ;
+	}
+
 	if(!newReminder) {
 		console.log('要推上去到firebase的reminder是沒有東西的');
 		return ;
 	}
 
-	if(!reminderListRef) {
-		console.log('還沒有選取要新增還是修改明細表');
-		return ;
+	newReminder.companyName = newReminder.companyName.trim();
+	if(!newReminder.companyName) {
+		throw setPreviewCompanyNameInputErrorText({errorText: '輸入公司名稱'}) ;
 	}
 
 	reminderListRef.child('list').push(newReminder)

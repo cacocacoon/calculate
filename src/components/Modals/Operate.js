@@ -10,6 +10,7 @@ class Operate extends React.Component {
 	render() {
 		const {
 			open,
+			closeOperateModal,
 		} = this.props;
 
 		// TODO: add stepper
@@ -18,8 +19,9 @@ class Operate extends React.Component {
 			<div>
 				<Dialog
 					title="操作明細表"
-					modal={true}
+					modal={false}
 					open={open}
+					onRequestClose={closeOperateModal}
 					contentStyle={{width: '375px'}}
 					>
 					<InitReminderListStepper />
