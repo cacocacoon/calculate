@@ -12,6 +12,10 @@ import {
 	setReminderListNameList,
 	setReminderList,
 	setPreviewCompanyNameInputErrorText,
+
+	initOperateModalUi,
+	initOperateModalData,
+	openOperateModal,
 } from '../actions';
 
 // NOTE: async action
@@ -22,6 +26,11 @@ export const logInFireBase = (email, password) => {
 		firebaseAuth.signInWithEmailAndPassword(email, password)
 			.then(user => {
 				console.log('登入成功', user);
+				// TODO: 初始化 operate modal
+				dispatch(initOperateModalUi());
+				dispatch(initOperateModalData());
+				dispatch(openOperateModal());
+				dispatch(closeLogInModal());
 			})
 			.catch(e => {
 				console.log('帳號密碼錯誤', e);

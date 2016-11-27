@@ -8,9 +8,6 @@ import {
 	changeEmail,
 	changePassword,
 	logInFireBase,
-	initOperateModalUi,
-	initOperateModalData,
-	openOperateModal,
 } from '../../actions';
 
 export default connect(
@@ -43,10 +40,6 @@ export default connect(
 
 		logIn: (email, password) => () => {
 			dispatch(logInFireBase(email.trim(), password.trim()));
-			// TODO: 初始化 operate modal
-			dispatch(initOperateModalUi());
-			dispatch(initOperateModalData());
-			dispatch(openOperateModal());
 		},
 
 		onChangeEmail: (event) => {
