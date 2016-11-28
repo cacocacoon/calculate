@@ -68,32 +68,6 @@ class InitReminderList extends React.Component {
 			</Chip>
 		);
 
-		const ReminderListNameInputText = (props) => {
-			switch(props.type) {
-				case CREATE:
-					return (
-						<AutoComplete
-							hintText="新增明細表"
-							searchText={props.tempName}
-							dataSource={[]}
-							onNewRequest={props.updateTempName}
-							errorText={errorText}
-							/>
-					);
-				case FETCH:
-					return (
-						<AutoComplete
-							hintText="搜尋明細表"
-							searchText={props.tempName}
-							dataSource={nameList}
-							onNewRequest={props.updateTempName}
-							errorText={errorText}
-							/>
-					);
-				default:
-					return null;
-			}
-		};
 		return (
 			<div style={{maxWidth: 380, maxHeight: 400, margin: 'auto'}}>
 				<Stepper
@@ -118,11 +92,28 @@ class InitReminderList extends React.Component {
 							輸入名稱
 						</StepButton>
 						<StepContent>
-							<ReminderListNameInputText
-								type={type}
-								updateTempName={this.updateTemp_Name}
-								tempName={this.state.temp_name}
-								/>
+							{type == CREATE &&
+								<AutoComplete
+									key={type}
+									hintText="新增明細表"
+									searchText={this.state.temp_name}
+									dataSource={[]}
+									onUpdateInput={this.updateTemp_Name}
+									onNewRequest={this.updateTemp_Name}
+									errorText={errorText}
+									/>
+							}
+							{type == FETCH &&
+								<AutoComplete
+									key={type}
+									hintText="搜尋明細表"
+									searchText={this.state.temp_name}
+									dataSource={nameList}
+									onUpdateInput={this.updateTemp_Name}
+									onNewRequest={this.updateTemp_Name}
+									errorText={errorText}
+									/>
+							}
 							<FinishButton tempName={this.state.temp_name} />
 						</StepContent>
 					</Step>
