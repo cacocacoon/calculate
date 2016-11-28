@@ -1,4 +1,5 @@
 import React from 'react';
+import Media from 'react-media'
 import HeaderBar from  '../../containers/HeaderBar/HeaderBar';
 import LogInModal from '../../containers/Modals/LogIn';
 import Plain from '../../containers/Plains/Plain';
@@ -9,27 +10,32 @@ import AddReminderButton from '../../containers/Button/AddReminder';
 class Main extends React.Component {
 	constructor(props) {
 		super(props);
+		this.A4Style = {
+			minHeight: '29.7cm',
+			width: ' 21cm',
+			margin: '30px auto',
+			padding: '1cm 1.5cm',
+			boxShadow: 'none',
+		};
 	}
 
 	render() {
 		return (
-			<div>
-				<HeaderBar />
-				<LogInModal />
-				{
-					// TODO: 1. ADD or MODIFY modal (d -> t)
-					// 甚麼時候該跳出 Operate Modal
-					// 1. 登入成功之後
-					// 2. 按下 header 上的操作鈕之後
-					// Operate Modal 跳出來時先初始化
-				}
-				<Plain />
-				<OperateModal />
-				<EditorModal />
-				<AddReminderButton />
-			</div>
-		);
-	}
+			<Media query="print">
+				{print => !print ? (
+					<div>
+						<HeaderBar />
+						<LogInModal />
+						<Plain />
+						<OperateModal />
+						<EditorModal />
+						<AddReminderButton />
+					</div>
+				) : <Plain A4Style={this.A4Style} />
+			}
+		</Media>
+	);
+}
 }
 
 export default Main;

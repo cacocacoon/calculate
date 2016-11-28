@@ -7,12 +7,20 @@ class Plain extends React.Component {
 		super();
 		this.reminderList = null;
 
-		this.A4Style = {
-			minHeight: '29.7cm',
-			width: ' 21cm',
-			margin: '30px auto',
-			padding: '1cm 1.5cm',
-		};
+
+		if(!props.A4Style) {
+			//default setting
+			this.A4Style = {
+				minHeight: '29.7cm',
+				width: ' 21cm',
+				margin: '30px auto',
+				padding: '1cm 1.5cm',
+			};
+		}
+		else {
+			this.A4Style = props.A4Style;
+		}
+
 
 		this.textStyle = {
 			marginTop: '70px',
