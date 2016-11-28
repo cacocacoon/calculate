@@ -43082,10 +43082,8 @@
 			var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
 			_this.A4Style = {
-				minHeight: '29.7cm',
-				width: ' 21cm',
-				margin: '30px auto',
-				padding: '1cm 1.5cm',
+				height: '100%',
+				width: '100%',
 				boxShadow: 'none'
 			};
 			return _this;
@@ -52930,7 +52928,8 @@
 				//default setting
 				_this.A4Style = {
 					minHeight: '29.7cm',
-					width: ' 21cm',
+					width: '100%',
+					maxWidth: '21cm',
 					margin: '30px auto',
 					padding: '1cm 1.5cm'
 				};
