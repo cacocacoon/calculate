@@ -56,6 +56,7 @@ class Plain extends React.Component {
 			for(let [key, reminder] of Object.entries(list)) {
 				array.push(
 					<PreviewReminderTable
+						key={key}
 						companyName={reminder.companyName}
 						entities={reminder.entities}
 						totalPriceExcludedTax={reminder.totalPriceExcludedTax}
