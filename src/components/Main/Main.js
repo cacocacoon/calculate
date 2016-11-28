@@ -11,10 +11,8 @@ class Main extends React.Component {
 	constructor(props) {
 		super(props);
 		this.A4Style = {
-			minHeight: '29.7cm',
-			width: ' 21cm',
-			margin: '30px auto',
-			padding: '1cm 1.5cm',
+			height: '100%',
+			width: '100%',
 			boxShadow: 'none',
 		};
 	}

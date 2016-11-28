@@ -12,7 +12,8 @@ class Plain extends React.Component {
 			//default setting
 			this.A4Style = {
 				minHeight: '29.7cm',
-				width: ' 21cm',
+				width: '100%',
+				maxWidth: '21cm',
 				margin: '30px auto',
 				padding: '1cm 1.5cm',
 			};
