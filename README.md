@@ -7,7 +7,7 @@
 2. <a href="http://redux.js.org/">Redux</a>
 3. <a href="https://facebook.github.io/immutable-js/">Immutable.js</a>
 把state 轉成 read-only 減少錯誤發生，增加程式運行效率
-4. <a href="https://firebase.google.com/">Firebase</a> 資料儲存在 Google Firebase 裡面，real-time databse，且具有**多人同時編輯**的能力
+4. <a href="https://firebase.google.com/">Firebase</a> 資料儲存在 Google Firebase 裡面，real-time databsse，且具有**多人同時編輯**的能力
 5. ES6
 
 ##未來會加入的功能
