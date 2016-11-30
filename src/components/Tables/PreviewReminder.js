@@ -73,7 +73,7 @@ class PreviewReminder extends React.Component {
 				fontWeight: 'bold',
 				color: 'lightgrey',
 			};
-			return <div style={textStyle}>空的</div>;
+			return <div style={textStyle}>Empty</div>;
 		}
 
 		return (

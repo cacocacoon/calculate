@@ -13,7 +13,7 @@ class HeaderBar extends Component {
 		return (
 			<div id="header-bar">
 				<AppBar
-					title="Calculate 測試版"
+					title="Reminder-Generator 測試版"
 					titleStyle={{display: 'flex', justifyContent: 'center'}}
 					iconStyleLeft={{display: 'none'}}
 					iconElementRight={<FlatButton label="操作" onTouchTap={touchTapOperateButton} />}
