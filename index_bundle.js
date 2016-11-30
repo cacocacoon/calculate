@@ -48805,11 +48805,11 @@
 		value: true
 	});
 	exports.default = {
-		apiKey: "AIzaSyCg5A6-c3ejlls60UgZJ6vdcBNuVHA1sSw",
-		authDomain: "test-3ef32.firebaseapp.com",
-		databaseURL: "https://test-3ef32.firebaseio.com",
-		storageBucket: "test-3ef32.appspot.com",
-		messagingSenderId: "156491155322"
+		apiKey: "AIzaSyBtj2UBxjYloe19WwSZEFR4GjsBU30RNJQ",
+		authDomain: "test-277db.firebaseapp.com",
+		databaseURL: "https://test-277db.firebaseio.com",
+		storageBucket: "test-277db.appspot.com",
+		messagingSenderId: "893119964425"
 	};
 
 /***/ },
