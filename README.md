@@ -4,6 +4,18 @@
 一直以來計算明細表示利用 Excel, Word 做，需要不斷的打字、複製、拖拉表格、在Excel, Word之間重複切換，會消耗掉許多時間，所以開發了這支程式。<br />
 此應用程式是用來減輕計算發票、開明細表的繁瑣、重複的步驟，即使不懂得計算細節也可使用，彈指之間就做好明細表。
 
+* 提供一個簡單介面操作，搜尋明細表(自動完成)，或新增明細表
+
+<img src="http://g.recordit.co/nyJUp3FEie.gif" width="350">
+
+* 不需要知道，該如何計算就能打表格出來
+
+<img src="http://g.recordit.co/3IxUFYQFv3.gif" width="350">
+
+* 利用 Firebase real-time database 可以同時編輯明細表，立即同步到其他人的畫面(左:Chrome, 右:Firefox)
+
+<img src="http://g.recordit.co/psjNs05oVJ.gif" width="500">
+
 ##使用技術
 1. <a href="https://facebook.github.io/react/">React</a>
 2. <a href="http://redux.js.org/">Redux</a>
