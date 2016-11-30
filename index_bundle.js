@@ -43386,7 +43386,7 @@
 					'div',
 					{ id: 'header-bar' },
 					_react2.default.createElement(_AppBar2.default, {
-						title: 'Calculate \u6E2C\u8A66\u7248',
+						title: 'Reminder-Generator \u6E2C\u8A66\u7248',
 						titleStyle: { display: 'flex', justifyContent: 'center' },
 						iconStyleLeft: { display: 'none' },
 						iconElementRight: _react2.default.createElement(_FlatButton2.default, { label: '\u64CD\u4F5C', onTouchTap: touchTapOperateButton })
@@ -53147,7 +53147,7 @@
 					return _react2.default.createElement(
 						'div',
 						{ style: textStyle },
-						'\u7A7A\u7684'
+						'Empty'
 					);
 				}
 
