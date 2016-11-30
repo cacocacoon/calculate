@@ -24,8 +24,8 @@ export const UIState = Immutable.fromJS({
 // const DIESEL = ENTITY.getIn(['TYPE', 'DIESEL']);
 export const dataState = Immutable.fromJS({
 	logIn: {
-		email: '',
-		password: ''
+		email: 'test@ptt.cc',
+		password: '123456'
 	},
 	operateReminderList: {
 		type: '',
