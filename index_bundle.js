@@ -42325,8 +42325,8 @@
 	// const DIESEL = ENTITY.getIn(['TYPE', 'DIESEL']);
 	var dataState = exports.dataState = _immutable2.default.fromJS({
 		logIn: {
-			email: '',
-			password: ''
+			email: 'test@ptt.cc',
+			password: '123456'
 		},
 		operateReminderList: {
 			type: '',
@@ -42389,22 +42389,22 @@
 			value: ENTITY.getIn(['TYPE', 'DIESEL'])
 		},
 		date: {
-			value: '2016/1/1'
+			value: '2016/12/12'
 		},
 		productName: {
 			value: '超級柴油'
 		},
 		count: {
-			value: '132'
+			value: '1500'
 		},
 		unit: {
 			value: 'L'
 		},
 		unitPrice: {
-			value: '12'
+			value: '21.5'
 		},
 		remark: {
-			value: 'swdfe'
+			value: '新富'
 		}
 	});
 
