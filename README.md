@@ -1,5 +1,5 @@
 # Reminder-Generator
-<a href="https://cacocacoon.github.io/calculate/">Live Demo</a>
+<a href="https://cacocacoon.github.io/Reminder-Generator/">Live Demo</a>
 
 ##目的
 一直以來計算明細表是使用 Excel、Word，會消耗掉許多時間。<br />
