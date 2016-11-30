@@ -6,7 +6,7 @@
 
 * 提供一個簡單介面操作，搜尋明細表(自動完成)，或新增明細表
 
-<img src="http://g.recordit.co/nyJUp3FEie.gif" width="350">
+<img src="http://g.recordit.co/rHs7c4j76v.gif" width="350">
 
 * 不需要知道，該如何計算就能打表格出來
 
