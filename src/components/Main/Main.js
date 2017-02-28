@@ -13,7 +13,7 @@ class Main extends React.Component {
 		this.A4Style = {
 			height: '100%',
 			width: '100%',
-			boxShadow: 'none',
+			boxShadow: '',
 		};
 	}
 
