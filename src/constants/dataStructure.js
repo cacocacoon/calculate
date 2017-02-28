@@ -85,9 +85,10 @@ export class DieselTotal {
 	calculate(entities) {
 		// 篩選出 DIESEL，然後計算加總結果存入到this.priceIncludeTax, this.count
 		entities.filter(e => e.type === DIESEL).reduce((self, e) => {
-			const { price, count} = e.calculate();
+			const {price, count} = e.calculate();
 			self.priceIncludeTax += price;
 			self.count += count;
+			return self;
 		}, this);
 
 		// 假如有超級柴油, 才要計算
@@ -120,9 +121,10 @@ export class LubOilTotal {
 	calculate(entities) {
 		// 篩選出 LUB_OIL，然後計算加總結果存入到this.priceIncludeTax, this.count
 		entities.filter(e => e.type === LUB_OIL).reduce((self, e) => {
-			const { price, count} = e.calculate();
+			const {price, count} = e.calculate();
 			self.priceIncludeTax += price;
 			self.count += count;
+			return self;
 		}, this);
 
 		// 假如有潤滑油, 才要計算
