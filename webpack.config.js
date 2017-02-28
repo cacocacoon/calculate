@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 // 讓你可以動態插入 bundle 好的 .js 檔到 .index.html
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -5,6 +6,12 @@ const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
   template: `${__dirname}/src/index.html`,
   filename: 'index.html',
   inject: 'body',
+});
+
+const UglifyJsPlugin = new webpack.optimize.UglifyJsPlugin({
+    compress: {
+        warnings: false
+    }
 });
 
 // entry 為進入點，output 為進行完 eslint、babel loader 轉譯後的檔案位置
@@ -38,5 +45,5 @@ module.exports = {
     inline: true,
     port: 8008,
   },
-  plugins: [HTMLWebpackPluginConfig],
+  plugins: [HTMLWebpackPluginConfig, UglifyJsPlugin],
 };
