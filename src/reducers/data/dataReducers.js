@@ -155,7 +155,7 @@ const dataReducers = handleActions({
 		state = state.set('createEntity', INIT_CREATE_ENTITY);
 
 		//editor panel 輸入潤滑油的單價都是未稅, 要轉換成含稅再去計算
-		if(type.value === ENTITY.get('LUB_OIL')) {
+		if(type.value === ENTITY.getIn(['TYPE', 'LUB_OIL'])) {
 			unitPrice.value = unitPrice.value * 1.05;
 		}
 

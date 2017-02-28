@@ -8,7 +8,7 @@ class PreviewReminder extends React.Component {
 		super();
 		this.containerStyle = {
 			display: 'flex',
-			margin: '0 auto',
+			margin: '0 auto 0.6cm',
 			width: '100%',
 			flexDirection: 'column',
 			justifyContent: 'flex-start',

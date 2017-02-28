@@ -1,4 +1,4 @@
-import config from '../constants/test/firebase/config';
+import config from '../constants/firebase/config';
 import firebase from 'firebase';
 
 firebase.initializeApp(config);

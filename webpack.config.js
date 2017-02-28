@@ -17,23 +17,22 @@ module.exports = {
     filename: 'index_bundle.js',
   },
   module: {
-    preLoaders: [
-      {
+    preLoaders: [{
         test: /\.jsx$|\.js$/,
         loader: 'eslint-loader',
         include: `${__dirname}/src`,
         exclude: /bundle\.js$/
-      }
-    ],
+    }],
     loaders: [{
       test: /\.js$/,
       exclude: /node_modules/,
       loader: 'babel-loader',
       query: {
-        presets: ['es2015', 'react'],
+        presets: ['es2015', 'react']
       },
     }],
   },
+  devtool: 'source-map',
   // 啟動開發測試用 server 設定（不能用在 production）
   devServer: {
     inline: true,
