@@ -21,9 +21,7 @@ export class BillingReminder {
 	}
 
 	setEntities(entities = []) {
-		for(let entity of entities) {
-			this.entities.push(BillingEntity.fromState(entity));
-		}
+		this.entities = entities.map(e => BillingEntity.fromState(e));
 	}
 
 	push(newBilling) {
@@ -59,10 +57,7 @@ export class BillingReminder {
 		state.totalTax = this.totalTax;
 		state.totalPrice = this.totalPrice;
 
-		state.entities = [];
-		for(let entity of this.entities) {
-			state.entities.push(entity.toState());
-		}
+		state.entities = this.entities.map(e => e.toState());
 
 		return state;
 	}
@@ -88,16 +83,12 @@ export class DieselTotal {
 	}
 
 	calculate(entities) {
-		for(let entity of entities) {
-			if(entity.type === DIESEL) {
-				let {
-					price,
-					count
-				} = entity.calculate();
-				this.priceIncludeTax += price;
-				this.count += count;
-			}
-		}
+		// 篩選出 DIESEL，然後計算加總結果存入到this.priceIncludeTax, this.count
+		entities.filter(e => e.type === DIESEL).reduce((self, e) => {
+			const { price, count} = e.calculate();
+			self.priceIncludeTax += price;
+			self.count += count;
+		}, this);
 
 		// 假如有超級柴油, 才要計算
 		if(this.count > 0) {
@@ -127,16 +118,12 @@ export class LubOilTotal {
 	}
 
 	calculate(entities) {
-		for(let entity of entities) {
-			if(entity.type === LUB_OIL) {
-				let {
-					price,
-					count
-				} = entity.calculate();
-				this.priceIncludeTax += price;
-				this.count += count;
-			}
-		}
+		// 篩選出 LUB_OIL，然後計算加總結果存入到this.priceIncludeTax, this.count
+		entities.filter(e => e.type === LUB_OIL).reduce((self, e) => {
+			const { price, count} = e.calculate();
+			self.priceIncludeTax += price;
+			self.count += count;
+		}, this);
 
 		// 假如有潤滑油, 才要計算
 		if(this.count > 0) {
