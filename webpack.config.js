@@ -8,6 +8,12 @@ const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
   inject: 'body',
 });
 
+const DefinePlugin = new webpack.DefinePlugin({
+  'process.env': {
+    NODE_ENV: JSON.stringify('production')
+  }
+})
+
 const UglifyJsPlugin = new webpack.optimize.UglifyJsPlugin({
     compress: {
         warnings: false
@@ -45,5 +51,5 @@ module.exports = {
     inline: true,
     port: 8008,
   },
-  plugins: [HTMLWebpackPluginConfig, UglifyJsPlugin],
+  plugins: [HTMLWebpackPluginConfig, DefinePlugin, UglifyJsPlugin],
 };
