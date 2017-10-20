@@ -1,0 +1,39 @@
+{
+  "name": "reminder-calculator",
+  "version": "2.0.0",
+  "description": "用來計算、儲存、讀取請款明細表",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack-dev-server --config webpack.dev.config.js",
+    "build": "webpack -p --progress --colors"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cacocacoon/calculate.git"
+  },
+  "author": "Luke Liu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cacocacoon/calculate/issues"
+  },
+  "homepage": "https://github.com/cacocacoon/calculate#readme",
+  "dependencies": {
+    "@types/firebase": "^2.4.32",
+    "@types/react": "^16.0.15",
+    "@types/react-dom": "^16.0.2",
+    "firebase": "^4.6.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "^3.2.3",
+    "css-loader": "^0.28.7",
+    "extract-text-webpack-plugin": "^3.0.1",
+    "node-sass": "^4.5.3",
+    "postcss-loader": "^2.0.8",
+    "sass-loader": "^6.0.6",
+    "typescript": "^2.5.3",
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.3"
+  }
+}
