@@ -36,23 +36,14 @@ const config = {
 	plugins: [
 		new webpack.optimize.ModuleConcatenationPlugin(),
 		new webpack.optimize.OccurrenceOrderPlugin(),
+		new webpack.NoEmitOnErrorsPlugin(),
 		new webpack.ProvidePlugin({ Promise: 'core-js/fn/promise' }),
-		new ExtractTextPlugin(BUILD_DIR + '/style.css'),
-		new webpack.NoEmitOnErrorsPlugin()
+		new ExtractTextPlugin(BUILD_DIR + '/style.css')
 	],
 	resolve: {
 		extensions: ['.js', 'jsx', '.ts', '.tsx']
 	},
-	devServer: {
-		contentBase: BUILD_DIR,
-		inline: true,
-		port: 8080
-	},
 	devtool: 'source-map',
-	watch: true,
-	watchOptions: {
-		ignored: /node_modules/
-	}
 }
 
 module.exports = config

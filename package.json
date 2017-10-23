@@ -4,8 +4,8 @@
   "description": "用來計算、儲存、讀取請款明細表",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --config webpack.dev.config.js",
-    "build": "webpack -p --progress --colors"
+    "dev": "webpack-dev-server --config webpack.dev.js",
+    "build": "webpack -p --progress --colors --config webpack.prod.js"
   },
   "repository": {
     "type": "git",
@@ -37,6 +37,7 @@
     "sass-loader": "^6.0.6",
     "typescript": "^2.5.3",
     "webpack": "^3.8.1",
-    "webpack-dev-server": "^2.9.3"
+    "webpack-dev-server": "^2.9.3",
+    "webpack-merge": "^4.1.0"
   }
 }
