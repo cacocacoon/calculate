@@ -20,6 +20,12 @@ const config = {
 				loader: 'awesome-typescript-loader'
 			},
 			{
+				test: /\.css$/,
+				use: ExtractTextPlugin.extract({
+					use: [{ loader: 'css-loader' }]
+				})
+			},
+			{
 				test: /\.scss$/,
 				use: ExtractTextPlugin.extract({
 					use: [{ loader: 'css-loader' }, { loader: 'postcss-loader' }, { loader: 'sass-loader' }]
