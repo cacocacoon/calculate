@@ -1,25 +1,53 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
+import './app.scss'
+import * as Rx from 'rxjs'
+import { autobind } from 'core-decorators'
 // import { Button, WhiteSpace, WingBlank } from 'antd-mobile'
 // import 'antd-mobile/dist/antd-mobile.css'
-import { Observable } from 'rxjs/Rx'
 
+type P = null
 
+type S = {
+	score: number
+}
 
-const observable = Observable.create(function subscription(observer) {
-	const intervalID = setInterval(() => {
-		observer.next('hi')
-	}, 1000)
+@autobind
+class App extends React.PureComponent<P, S> {
+	private pressEvent: Rx.Observable<null> = null
 
-	return function unsubscribe() {
-		clearInterval(intervalID)
+	private pressEventSubscription: Rx.Subscription = null
+
+	public state: S = {
+		score: 0
 	}
-})
 
+	private mouseDown(): void {
+		this.pressEventSubscription = this.pressEvent.subscribe(() => {
+			this.setState(prevState => ({
+				score: prevState.score + 1
+			}))
+		})
+	}
 
-class App extends React.Component<null, null> {
-	render(): JSX.Element {
-		return <div />
+	private mouseUp(): void {
+		this.pressEventSubscription.unsubscribe()
+	}
+
+	public componentDidMount(): void {
+		this.pressEvent = Rx.Observable.create(observer => {
+			setInterval(() => {
+				observer.next()
+			}, 300)
+		})
+	}
+
+	public render(): JSX.Element {
+		return (
+			<div onMouseDown={this.mouseDown} onMouseUp={this.mouseUp}>
+				{this.state.score}
+			</div>
+		)
 	}
 }
 
