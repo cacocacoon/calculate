@@ -6,12 +6,9 @@ const common = require('./webpack.common.js')
 const BUILD_DIR = path.resolve(__dirname, 'build')
 
 const config = {
-	plugins: [
-		new webpack.HotModuleReplacementPlugin()
-	],
 	devServer: {
 		contentBase: BUILD_DIR,
-		hot: true,
+		inline: true,
 		port: 8080
 	}
 }
