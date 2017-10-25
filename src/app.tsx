@@ -6,19 +6,19 @@ import './app.scss'
 // import { Button, WhiteSpace, WingBlank } from 'antd-mobile'
 // import 'antd-mobile/dist/antd-mobile.css'
 
-type P = null
+type Props = null
 
-type S = {
+type State = {
 	score: number
 }
 
 @autobind
-class App extends React.PureComponent<P, S> {
+class App extends React.PureComponent<Props, State> {
 	private pressEvent: Rx.Observable<null> = null
 
 	private pressEventSubscription: Rx.Subscription = null
 
-	public state: S = {
+	public state: State = {
 		score: 0
 	}
 
