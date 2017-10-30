@@ -1,6 +1,8 @@
 const webpack = require('webpack')
 const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+const HappyPack = require('happypack')
 
 const APP_DIR = path.resolve(__dirname, 'src')
 const BUILD_DIR = path.resolve(__dirname, 'build')
@@ -16,34 +18,45 @@ const config = {
 	module: {
 		rules: [
 			{
-				test: /\.tsx?$/,
-				loader: 'awesome-typescript-loader'
-			},
-			{
 				test: /\.css$/,
-				use: ExtractTextPlugin.extract({
-					use: [{ loader: 'css-loader' }]
-				})
+				use: ExtractTextPlugin.extract(['css-loader'])
 			},
 			{
 				test: /\.scss$/,
-				use: ExtractTextPlugin.extract({
-					use: [{ loader: 'css-loader' }, { loader: 'postcss-loader' }, { loader: 'sass-loader' }]
-				})
+				use: ExtractTextPlugin.extract([
+					'css-loader',
+					'postcss-loader',
+					'sass-loader'
+				])
+			},
+			{
+				test: /\.tsx?$/,
+				use: ['happypack/loader?id=tsx']
 			}
 		]
 	},
 	plugins: [
+		new HappyPack({
+			id: 'tsx',
+			threads: 4,
+			loaders: [
+				{
+					loader: 'ts-loader',
+					options: { happyPackMode: true }
+				}
+			]
+		}),
 		new webpack.optimize.ModuleConcatenationPlugin(),
 		new webpack.optimize.OccurrenceOrderPlugin(),
 		new webpack.NoEmitOnErrorsPlugin(),
 		new webpack.ProvidePlugin({ Promise: 'core-js/fn/promise' }),
-		new ExtractTextPlugin(BUILD_DIR + '/style.css')
+		new ExtractTextPlugin('/style.css'),
+		new ForkTsCheckerWebpackPlugin()
 	],
 	resolve: {
 		extensions: ['.js', 'jsx', '.ts', '.tsx']
 	},
-	devtool: 'source-map',
+	devtool: 'source-map'
 }
 
 module.exports = config
