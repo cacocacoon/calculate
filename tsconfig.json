@@ -2,12 +2,15 @@
 	"compilerOptions": {
 		"outDir": "./build/",
 		"sourceMap": true,
-		"noImplicitAny": false,
 		"allowSyntheticDefaultImports": true,
 		"experimentalDecorators": true,
+		"isolatedModules": true,
+		"strict": true,
 		"module": "commonjs",
 		"target": "es2015",
-		"jsx": "react"
+		"jsx": "react",
+		"pretty": true,
+		"removeComments": true
 	},
 	"include": ["./src/**/*"]
 }
