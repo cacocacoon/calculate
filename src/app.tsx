@@ -1,6 +1,6 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import * as Rx from 'rxjs';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Rx from 'rxjs';
 import { autobind } from 'core-decorators';
 
 import './app.scss';
@@ -17,7 +17,9 @@ class App extends React.PureComponent<Props, State> {
 		score: 0
 	};
 
-	private readonly mouseUp = Rx.Observable.fromEvent(document.querySelector('html'), 'mouseup');
+	private readonly html = document.querySelector('html');
+
+	private readonly mouseUp = Rx.Observable.fromEvent(this.html, 'mouseup');
 
 	private mouseDown() {
 		Rx.Observable

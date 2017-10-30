@@ -2,6 +2,7 @@
 	"compilerOptions": {
 		"outDir": "./build/",
 		"sourceMap": true,
+		"noUnusedLocals": true,
 		"noImplicitAny": false,
 		"allowSyntheticDefaultImports": true,
 		"experimentalDecorators": true,
