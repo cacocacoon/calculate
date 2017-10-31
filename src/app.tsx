@@ -1,6 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Rx from 'rxjs';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import * as Rx from 'rxjs';
 import { autobind } from 'core-decorators';
 
 import './app.scss';

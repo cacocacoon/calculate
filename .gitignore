@@ -1,1 +1,5 @@
 node_modules
+build/app.js
+build/app.js.map
+build/style.css
+build/style.css.map
