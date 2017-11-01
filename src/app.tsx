@@ -20,7 +20,7 @@ class App extends React.PureComponent<Props, State> {
 	private readonly html = document.querySelector('html');
 
 	private readonly mouseUp = Rx.Observable.fromEvent(this.html, 'mouseup');
-
+	
 	private mouseDown() {
 		Rx.Observable
 			.interval(100)
@@ -36,7 +36,7 @@ class App extends React.PureComponent<Props, State> {
 
 	public render() {
 		return (
-			<div id="app" onClick={this.click} onMouseDown={this.mouseDown}>
+			<div onClick={this.click} onMouseDown={this.mouseDown}>
 				{this.state.score}
 			</div>
 		);
