@@ -47,7 +47,7 @@ const config = {
 		// 將 css code 全放在 style.css
 		new ExtractTextPlugin('./style.css'),
 		// 可加快編譯速度
-		new ForkTsCheckerWebpackPlugin()
+		// new ForkTsCheckerWebpackPlugin()
 	],
 	resolve: {
 		extensions: ['.js', 'jsx', '.ts', '.tsx']
