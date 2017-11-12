@@ -7,6 +7,7 @@ type Props = {
 type State = {
 	show: Boolean
 }
+
 @autobind
 class Toggleable extends React.PureComponent<Props, State> {
 	state: State = {
@@ -36,6 +37,7 @@ const TaggleableMenu = props => (
 		)}
 	</Toggleable>
 )
+
 export default class Menu extends React.Component {
 	render() {
 		return [
