@@ -15,8 +15,8 @@ class Toggleable extends React.PureComponent<Props, State> {
 	}
 
 	toggle() {
-		this.setState(prevState => ({
-			show: !prevState.show
+		this.setState(state => ({
+			show: !state.show
 		}))
 	}
 
@@ -38,18 +38,20 @@ const TaggleableMenu = props => (
 	</Toggleable>
 )
 
-export default class Menu extends React.Component {
-	render() {
-		return [
-			<TaggleableMenu title="First Menu">
-				<p>some content</p>
-			</TaggleableMenu>,
-			<TaggleableMenu title="Second Menu">
-				<p>Another content</p>
-			</TaggleableMenu>,
-			<TaggleableMenu title="Third Menu">
-				<p>More content</p>
-			</TaggleableMenu>
-		]
+export default class Menu extends React.Component<React.ComponentState> {
+	render(): JSX.Element {
+		return (
+			<>
+				<TaggleableMenu title="First Menu">
+					<p>some content</p>
+				</TaggleableMenu>
+				<TaggleableMenu title="Second Menu">
+					<p>Another content</p>
+				</TaggleableMenu>
+				<TaggleableMenu title="Third Menu">
+					<p>More content</p>
+				</TaggleableMenu>
+			</>
+		)
 	}
 }
