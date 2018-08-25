@@ -1,6 +1,5 @@
 import React from 'react';
-import createFragment from 'react-addons-create-fragment';
-import TextField from 'material-ui/TextField';
+import {BillingReminder} from '../../constants/dataStructure'
 
 class PreviewReminder extends React.Component {
 
@@ -56,13 +55,21 @@ class PreviewReminder extends React.Component {
 		const {
 			previewMode,
 			setCompanyName,
-			companyName,
-			entities,
-			totalPriceExcludedTax,
-			totalTax,
-			totalPrice,
+			previewReminder,
+			// companyName,
+			// entities,
+			// totalPriceExcludedTax,
+			// totalTax,
+			// totalPrice,
 			companyNameInputErrorText,
 		} = this.props;
+
+		const newReminder = BillingReminder.fromState(previewReminder);
+		const entities = newReminder.entities;
+		const companyName = newReminder.companyName;
+		const totalPriceExcludedTax = newReminder.totalPriceExcludedTax;
+		const totalTax = newReminder.totalTax;
+		const totalPrice = newReminder.totalPrice;
 
 		// 沒有東西就不用render元件
 		if(entities.length == 0) {
@@ -103,26 +110,22 @@ class PreviewReminder extends React.Component {
 						<div style={this.mediumCellStyle}>金額</div>
 						<div style={this.mediumCellStyle}>備註</div>
 					</div>
-					{
-						entities.map((entity, index) => {
-							const date = new Date(entity.date);
-							entity.date = `${date.getMonth() + 1}/${date.getDate()}`;
-							entity.price = Math.round(entity.price);
+					{entities.map((entity, index) => {
+						const date = new Date(entity.date);
 
-							return (
-								<div key={index} style={this.columnStyle}>
-									<div style={this.smallCellStyle}>{index + 1}</div>
-									<div style={this.smallCellStyle}>{entity.date}</div>
-									<div style={this.mediumCellStyle}>{entity.productName}</div>
-									<div style={this.mediumCellStyle}>{entity.count}</div>
-									<div style={this.smallCellStyle}>{entity.unit}</div>
-									<div style={this.smallCellStyle}>{entity.unitPrice}</div>
-									<div style={this.mediumCellStyle}>{entity.price}</div>
-									<div style={this.mediumCellStyle}>{entity.remark}</div>
-								</div>
-							);
-						})
-					}
+						return (
+							<div key={index} style={this.columnStyle}>
+								<div style={this.smallCellStyle}>{index + 1}</div>
+								<div style={this.smallCellStyle}>{`${date.getMonth() + 1}/${date.getDate()}`}</div>
+								<div style={this.mediumCellStyle}>{entity.productName}</div>
+								<div style={this.mediumCellStyle}>{entity.count}</div>
+								<div style={this.smallCellStyle}>{entity.unit}</div>
+								<div style={this.smallCellStyle}>{entity.unitPrice}</div>
+								<div style={this.mediumCellStyle}>{Math.round(entity.price)}</div>
+								<div style={this.mediumCellStyle}>{entity.remark}</div>
+							</div>
+						);
+					})}
 					<div style={this.columnStyle}>
 						<div style={this.longCellStyle}>銷售總金額</div>
 						<div style={this.mediumCellStyle}>{totalPriceExcludedTax}</div>

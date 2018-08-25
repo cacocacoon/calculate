@@ -24,12 +24,8 @@ class LogIn extends React.Component {
 		} = this.props;
 
 		const actions = [
-			// <FlatButton
-			// 	label="取消"
-			// 	secondary={true}
-			// 	onTouchTap={closeModal}
-			// 	/>,
 			<FlatButton
+				key="flat-button"
 				label="登入"
 				primary={true}
 				disabled={!enableLogInButton}
@@ -39,12 +35,6 @@ class LogIn extends React.Component {
 
 		return (
 			<div>
-				{
-					// <RaisedButton
-					// 	label="開啟登入方塊"
-					// 	onTouchTap={openModal}
-					// 	/>
-				}
 				<Dialog
 					title="登入"
 					actions={actions}
@@ -57,14 +47,16 @@ class LogIn extends React.Component {
 						floatingLabelText="信箱"
 						value={email}
 						onChange={onChangeEmail}
-						/><br />
+					/>
+					<br />
 					<TextField
 						hintText="XXXXXX"
 						floatingLabelText="密碼"
 						type="password"
 						value={password}
 						onChange={onChangePassword}
-						/><br />
+					/>
+					<br />
 				</Dialog>
 			</div>
 		);

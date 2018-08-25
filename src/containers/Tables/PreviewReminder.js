@@ -8,10 +8,11 @@ import {
 
 export default connect(
 	(state) => ({
-		entities: state.getIn(['data', 'previewReminder', 'entities']).toJS(),
-		totalPriceExcludedTax: state.getIn(['data', 'previewReminder', 'totalPriceExcludedTax']),
-		totalTax: state.getIn(['data', 'previewReminder', 'totalTax']),
-		totalPrice: state.getIn(['data', 'previewReminder', 'totalPrice']),
+		previewReminder: state.getIn(['data', 'previewReminder']).toJS(),
+		// entities: state.getIn(['data', 'previewReminder', 'entities']).toJS(),
+		// totalPriceExcludedTax: state.getIn(['data', 'previewReminder', 'totalPriceExcludedTax']),
+		// totalTax: state.getIn(['data', 'previewReminder', 'totalTax']),
+		// totalPrice: state.getIn(['data', 'previewReminder', 'totalPrice']),
 		previewMode: true,
 		companyNameInputErrorText: state.getIn(['ui', 'previewReminder', 'companyNameInputErrorText']),
 	}),

@@ -174,8 +174,6 @@ const dataReducers = handleActions({
 		let billingReminder = BillingReminder.fromState(previewReminderState);
 		// 把新的 billing 加入明細表物件裡面
 		billingReminder.push(newBilling);
-		// 計算明細表
-		billingReminder.calculate();
 		// 轉換成 plain object, 存回去state
 		previewReminderState = billingReminder.toState();
 		state = state.set('previewReminder', Immutable.fromJS(previewReminderState));
@@ -189,10 +187,7 @@ const dataReducers = handleActions({
 
 	SET_PREVIEW_REMINDER_CAMPANY_NAME: (state, {payload}) => {
 		return state.setIn(['previewReminder', 'companyName'], payload.name);
-	},
-	SET_PREVIEW_REMINDER_CAMPANY_NAME: (state, {payload}) => {
-		return state.setIn(['previewReminder', 'companyName'], payload.name);
-	},
+	}
 
 }, dataState);
 

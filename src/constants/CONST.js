@@ -61,20 +61,5 @@ export const INIT_CREATE_ENTITY = Immutable.fromJS({
 
 export const INIT_REMINDER = Immutable.fromJS({
 	companyName: '',
-	dieselTotal: {
-		count: 0,
-		unitPriceExcludeTax: 0.0,
-		priceExcludeTax: 0.0,
-		priceIncludeTax: 0.0,
-	},
-	lubOilTotal: {
-		count: 0,
-		unitPriceExcludeTax: 0.0,
-		priceExcludeTax: 0.0,
-		priceIncludeTax: 0.0,
-	},
-	totalPriceExcludedTax: 0.0,
-	totalTax: 0,
-	totalPrice: 0,
 	entities: [],
 });

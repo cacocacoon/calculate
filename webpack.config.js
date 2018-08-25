@@ -1,55 +1,31 @@
-const webpack = require('webpack');
-// 讓你可以動態插入 bundle 好的 .js 檔到 .index.html
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path')
+const APP_DIR = path.resolve(__dirname, 'src')
+const BUILD_DIR = path.resolve(__dirname, 'docs')
 
-const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: `${__dirname}/src/index.html`,
-  filename: 'index.html',
-  inject: 'body',
-});
+const config = {
+	entry: APP_DIR + '/index.js',
+	output: {
+		path: BUILD_DIR,
+		filename: 'app.js'
+	},
+	module: {
+		rules: [
+			{
+				test: /\.jsx?$/,
+				exclude: /node_modules/,
+				loader: 'babel-loader',
+			}
+		]
+	},
+	resolve: {
+		extensions: ['.js', '.jsx']
+	},
+	devtool: 'source-map',
+	devServer: {
+		inline: true,
+		contentBase: BUILD_DIR,
+		port: 8008
+	}
+}
 
-const DefinePlugin = new webpack.DefinePlugin({
-  'process.env': {
-    NODE_ENV: JSON.stringify('production')
-  }
-})
-
-const UglifyJsPlugin = new webpack.optimize.UglifyJsPlugin({
-    compress: {
-        warnings: false
-    }
-});
-
-// entry 為進入點，output 為進行完 eslint、babel loader 轉譯後的檔案位置
-module.exports = {
-  entry: [
-    './src/index.js',
-  ],
-  output: {
-    path: `${__dirname}/dist`,
-    filename: 'index_bundle.js',
-  },
-  module: {
-    preLoaders: [{
-        test: /\.jsx$|\.js$/,
-        loader: 'eslint-loader',
-        include: `${__dirname}/src`,
-        exclude: /bundle\.js$/
-    }],
-    loaders: [{
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: 'babel-loader',
-      query: {
-        presets: ['es2015', 'react']
-      },
-    }],
-  },
-  devtool: 'cheap-module-source-map',
-  // 啟動開發測試用 server 設定（不能用在 production）
-  devServer: {
-    inline: true,
-    port: 8008,
-  },
-  plugins: [HTMLWebpackPluginConfig, DefinePlugin, UglifyJsPlugin],
-};
+module.exports = config

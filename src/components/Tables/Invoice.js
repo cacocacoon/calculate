@@ -1,5 +1,4 @@
 import React from 'react';
-import createFragment from 'react-addons-create-fragment';
 import TextField from 'material-ui/TextField';
 
 class Invoice extends React.Component {

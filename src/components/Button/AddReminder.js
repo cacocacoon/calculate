@@ -15,7 +15,7 @@ class AddReminderButton extends Component {
 					secondary={true}
 					style={{position: 'fixed', bottom: '20px', right: '20px'}}
 					onTouchTap={openEditor(this.context)}
-					>
+				>
 					<ContentAdd />
 				</FloatingActionButton>
 			</div>

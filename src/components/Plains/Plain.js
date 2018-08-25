@@ -2,6 +2,7 @@ import React from 'react';
 import Paper from 'material-ui/Paper';
 import PreviewReminderTable from '../../components/Tables/PreviewReminder';
 import InvoiceTable from '../../components/Tables/Invoice';
+
 class Plain extends React.Component {
 	constructor(props) {
 		super();
@@ -44,20 +45,17 @@ class Plain extends React.Component {
 			reminderList
 		} = this.props;
 
-		let text = '';
-
-		if(!reminderList) {
-			text = '請點擊右上角 操作';
-		}
-		else if(!reminderList.get('list')) {
-			text = '請點擊右下角 +';
-		}
-		else {
-			this.reminderList = reminderList.toJS();
-		}
-
-
-
+		const text = (() => {
+			if(!reminderList) {
+				return '請點擊右上角 操作';
+			}
+			else if(!reminderList.get('list')) {
+				return '請點擊右下角 +';
+			}
+			else {
+				this.reminderList = reminderList.toJS();
+			}
+		})();
 
 		// 請款明細表
 		const ReminderTables = () => {
@@ -65,26 +63,20 @@ class Plain extends React.Component {
 				return <div style={this.textStyle}>{text}</div>;
 			}
 
-			let list = this.reminderList.list;
-
-			let reminderArray = [];
-			for(let [key, reminder] of Object.entries(list)) {
-				reminderArray.push(
-					<PreviewReminderTable
-						key={key}
-						companyName={reminder.companyName}
-						entities={reminder.entities}
-						totalPriceExcludedTax={reminder.totalPriceExcludedTax}
-						totalTax={reminder.totalTax}
-						totalPrice={reminder.totalPrice}
-						previewMode={false}
-						/>
-				);
-			}
-
 			return (
 				<div>
-					{reminderArray}
+					{Object.entries(this.reminderList.list).map(([key, reminder]) => (
+						<PreviewReminderTable
+							key={key}
+							previewReminder={reminder}
+							// companyName={reminder.companyName}
+							// entities={reminder.entities}
+							// totalPriceExcludedTax={reminder.totalPriceExcludedTax}
+							// totalTax={reminder.totalTax}
+							// totalPrice={reminder.totalPrice}
+							previewMode={false}
+						/>
+					))}
 				</div>
 			);
 		};
@@ -101,34 +93,31 @@ class Plain extends React.Component {
 				flexWrap: 'wrap',
 				justifyContent: 'flex-start',
 			};
-
-			const list = this.reminderList.list;
-
-			const invoiceArray = [];
-			for(const [key, reminder] of Object.entries(list)) {
-				invoiceArray.push(
-					<InvoiceTable
-						key={key}
-						companyName={reminder.companyName}
-						dieselTotal={reminder.dieselTotal}
-						lubOilTotal={reminder.lubOilTotal}
-						totalPriceExcludedTax={reminder.totalPriceExcludedTax}
-						totalTax={reminder.totalTax}
-						totalPrice={reminder.totalPrice}
-					/>
-				);
-			}
 			return (
 				<div style={tableStyle}>
-					{invoiceArray}
+					{Object.entries(this.reminderList.list).map(([key, reminder]) => (
+						<InvoiceTable
+							key={key}
+							companyName={reminder.companyName}
+							dieselTotal={reminder.dieselTotal}
+							lubOilTotal={reminder.lubOilTotal}
+							totalPriceExcludedTax={reminder.totalPriceExcludedTax}
+							totalTax={reminder.totalTax}
+							totalPrice={reminder.totalPrice}
+						/>
+					))}
 				</div>
 			);
 		};
 
 		return (
 			<div>
-				<Paper style={this.A4Style} children={<ReminderTables />} zDepth={5} />
-				<Paper style={this.InvoiceTablesStyle} children={<InvoiceTables />} zDepth={5} />
+				<Paper style={this.A4Style} zDepth={5}>
+					<ReminderTables />
+				</Paper>
+				<Paper style={this.InvoiceTablesStyle} zDepth={5}>
+					<InvoiceTables />
+				</Paper>
 			</div>
 		);
 	}

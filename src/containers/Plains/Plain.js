@@ -8,9 +8,5 @@ import {
 export default connect(
 	(state) => ({
 		reminderList: state.getIn(['data', 'reminderList']),
-	}),
-
-	(dispatch) => ({
-
-	}),
+	})
 )(Plain);

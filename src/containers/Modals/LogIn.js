@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import LogIn from '../../components/Modals/LogIn';
-import firebaseAuth from '../../firebase/auth';
+import firebase from '../../firebase/firebase';
 
 import {
 	closeLogInModal,
@@ -26,10 +26,10 @@ export default connect(
 		componentWillMount: (open = true) => {
 			// firebaseAuth.signOut();
 			// return ;
-			firebaseAuth.onAuthStateChanged((user) => {
+			firebase.auth().onAuthStateChanged((user) => {
 				if (user && open) {// 已登入, 且 modal 是打開的狀態才要關掉 modal
-						dispatch(closeLogInModal());
-						console.log('已登入: ', user.email);
+					dispatch(closeLogInModal());
+					console.log('已登入: ', user.email);
 				}
 				if(!user && !open) {// 未登入, 且 modal 是沒打開的才要開啟 modal
 					dispatch(openLogInModal());

@@ -10,10 +10,19 @@ export class BillingReminder {
 		this.companyName = '';
 		this.dieselTotal = null;
 		this.lubOilTotal = null;
-		this.totalPriceExcludedTax = 0;
-		this.totalTax = 0;
-		this.totalPrice = 0;
 		this.entities = [];
+	}
+
+	get totalPriceExcludedTax() {
+		return Math.round(this.dieselTotal.priceExcludeTax + this.lubOilTotal.priceExcludeTax);
+	}
+
+	get totalTax() {
+		return Math.round(this.dieselTotal.priceExcludeTax * 0.05) + Math.round(this.lubOilTotal.priceExcludeTax * 0.05);
+	}
+
+	get totalPrice() {
+		return this.totalPriceExcludedTax + this.totalTax;
 	}
 
 	setCompanyName(companyName = '') {
@@ -22,40 +31,26 @@ export class BillingReminder {
 
 	setEntities(entities = []) {
 		this.entities = entities.map(e => BillingEntity.fromState(e));
+		this.dieselTotal.entities = this.entities.filter(e => e.type === DIESEL);
+		this.lubOilTotal.entities = this.entities.filter(e => e.type === LUB_OIL);
 	}
 
 	push(newBilling) {
 		this.entities.push(newBilling);
-	}
+		switch (newBilling.type) {
+			case DIESEL:
+				this.dieselTotal.entities.push(newBilling);
+				break;
+			case LUB_OIL:
+				this.lubOilTotal.entities.push(newBilling);
+				break;
 
-	calculate() {
-		this.dieselTotal.calculate(this.entities);
-		this.lubOilTotal.calculate(this.entities);
-
-		this.totalPriceExcludedTax = Math.round(
-			this.dieselTotal.priceExcludeTax +
-			this.lubOilTotal.priceExcludeTax
-		);
-
-		this.totalTax =
-			Math.round(this.dieselTotal.priceExcludeTax * 0.05) +
-			Math.round(this.lubOilTotal.priceExcludeTax * 0.05);
-
-		this.totalPrice = this.totalPriceExcludedTax + this.totalTax;
-
-		return this;
+		}
 	}
 
 	toState() {
 		let state = INIT_REMINDER.toJS();
 		state.companyName = this.companyName;
-
-		state.dieselTotal = this.dieselTotal.toState();
-		state.lubOilTotal = this.lubOilTotal.toState();
-
-		state.totalPriceExcludedTax = this.totalPriceExcludedTax;
-		state.totalTax = this.totalTax;
-		state.totalPrice = this.totalPrice;
 
 		state.entities = this.entities.map(e => e.toState());
 
@@ -66,83 +61,36 @@ export class BillingReminder {
 	static fromState(state) {
 		let reminder = new BillingReminder();
 		reminder.setCompanyName(state.companyName);
+		reminder.dieselTotal = new OilTotal();
+		reminder.lubOilTotal = new OilTotal();
 		reminder.setEntities(state.entities);
-		reminder.dieselTotal = new DieselTotal();
-		reminder.lubOilTotal = new LubOilTotal();
 		return reminder;
 	}
-
 }
 
-export class DieselTotal {
+class OilTotal {
 	constructor() {
-		this.count = 0;
-		this.unitPriceExcludeTax = 0.0;
-		this.priceIncludeTax = 0;
-		this.priceExcludeTax = 0;
+		this.entities = [];
 	}
 
-	calculate(entities) {
-		// 篩選出 DIESEL，然後計算加總結果存入到this.priceIncludeTax, this.count
-		entities.filter(e => e.type === DIESEL).reduce((self, e) => {
-			const {price, count} = e.calculate();
-			self.priceIncludeTax += price;
-			self.count += count;
-			return self;
-		}, this);
-
-		// 假如有超級柴油, 才要計算
-		if(this.count > 0) {
-			this.priceExcludeTax = this.priceIncludeTax / 1.05;
-			this.unitPriceExcludeTax = this.priceExcludeTax / this.count;
-		}
-
-		return this;
+	get count() {
+		return this.entities.reduce((count, e) => (
+			count += e.count
+		), 0);
 	}
 
-	toState() {
-		return {
-			count: this.count,
-			unitPriceExcludeTax: this.unitPriceExcludeTax,
-			priceExcludeTax: this.priceExcludeTax,
-			priceIncludeTax: this.priceIncludeTax,
-		};
-	}
-}
-
-export class LubOilTotal {
-	constructor() {
-		this.count = 0;
-		this.unitPriceExcludeTax = 0.0;
-		this.priceIncludeTax = 0;
-		this.priceExcludeTax = 0;
+	get priceIncludeTax() {
+		return this.entities.reduce((priceIncludeTax, e) => (
+			priceIncludeTax += e.price
+		), 0);
 	}
 
-	calculate(entities) {
-		// 篩選出 LUB_OIL，然後計算加總結果存入到this.priceIncludeTax, this.count
-		entities.filter(e => e.type === LUB_OIL).reduce((self, e) => {
-			const {price, count} = e.calculate();
-			self.priceIncludeTax += price;
-			self.count += count;
-			return self;
-		}, this);
-
-		// 假如有潤滑油, 才要計算
-		if(this.count > 0) {
-			this.priceExcludeTax = this.priceIncludeTax / 1.05;
-			this.unitPriceExcludeTax = this.priceExcludeTax / this.count;
-		}
-
-		return this;
+	get priceExcludeTax() {
+		return this.count > 0 ? this.priceIncludeTax / 1.05 : 0;
 	}
 
-	toState() {
-		return {
-			count: this.count,
-			unitPriceExcludeTax: this.unitPriceExcludeTax,
-			priceExcludeTax: this.priceExcludeTax,
-			priceIncludeTax: this.priceIncludeTax,
-		};
+	get unitPriceExcludeTax() {
+		return this.count > 0 ? this.priceExcludeTax / this.count : 0.0;
 	}
 }
 
@@ -155,8 +103,11 @@ export class BillingEntity {
 		this.count = 0;
 		this.unit = '';
 		this.unitPrice = 0.0;
-		this.price = 0;
 		this.remark = '';
+	}
+
+	get price() {
+		return Math.round(this.count * this.unitPrice * 10000) / 10000;
 	}
 
 	toState() {
@@ -167,7 +118,6 @@ export class BillingEntity {
 			count: this.count,
 			unit: this.unit,
 			unitPrice: this.unitPrice,
-			price: this.price,
 			remark: this.remark,
 		}
 	}
@@ -185,15 +135,4 @@ export class BillingEntity {
 
 		return billingEntity;
 	}
-
-	calculate() {
-		this.setPrice();
-		return this;
-	}
-
-	setPrice() {
-		// javascript 有精準度誤差, 四捨五入到第五位
-		this.price = Math.round(this.count * this.unitPrice * 10000) / 10000;
-	}
-
 }

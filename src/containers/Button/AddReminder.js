@@ -9,10 +9,7 @@ import {
 } from '../../actions';
 
 export default connect(
-	(state) => ({
-
-	}),
-
+	state => ({}),
 	(dispatch) => ({
 		openEditor: (context) => () => {
 			const data = context.store.getState().get('data').toJS();

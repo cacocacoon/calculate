@@ -1,5 +1,4 @@
-import 'whatwg-fetch';
-import firebaseAuth from '../firebase/auth';
+import firebase from '../firebase/firebase';
 import fbDatabase from '../firebase/database';
 
 import {
@@ -23,7 +22,7 @@ export const logInFireBase = (email, password) => {
 	return (dispatch) => {
 		// NOTE: 要鎖住登入按鈕避免重複執行 DONE
 		dispatch(disableLogInButton());
-		firebaseAuth.signInWithEmailAndPassword(email, password)
+		firebase.auth().signInWithEmailAndPassword(email, password)
 			.then(user => {
 				console.log('登入成功', user);
 				// TODO: 初始化 operate modal
@@ -81,7 +80,7 @@ export const createReminderList = (name = '') => (dispatch) => {
 
 
 export const fetchReminderList = (name = '') => (dispatch) => {
-	if(Boolean((typeof name === "string") && !name)) {
+	if(typeof name === 'string' && !name) {
 		throw new Error('輸入名稱不正確');
 	}
 
@@ -89,7 +88,7 @@ export const fetchReminderList = (name = '') => (dispatch) => {
 	keepSyncingReminderList(dispatch, reminderListRef);
 };
 
-export const pushNewReminder = (newReminder = null) => (dispatch) => {
+export const pushNewReminder = (newReminder = null) => () => {
 	if(!reminderListRef) {
 		console.log('還沒有選取要新增還是修改明細表');
 		return ;
@@ -122,7 +121,7 @@ const keepSyncingReminderList = (dispatch, reminderListRef) => {
 		if(!reminderList) {
 			throw new Error(`與 firebase reminderList.${reminderListRef.key} 同步失敗`);
 		}
-
+		
 		dispatch(setReminderList(reminderList));
 		console.log(`與 firebase reminderList.${reminderListRef.key} 同步成功`);
 	});
