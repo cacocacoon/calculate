@@ -18,30 +18,24 @@ import {
 } from '../actions';
 
 // NOTE: async action
-export const logInFireBase = (email, password) => {
-	return (dispatch) => {
-		// NOTE: 要鎖住登入按鈕避免重複執行 DONE
-		dispatch(disableLogInButton());
-		firebase.auth().signInWithEmailAndPassword(email, password)
-			.then(user => {
-				console.log('登入成功', user);
-				// TODO: 初始化 operate modal
-				dispatch(initOperateModalUi());
-				dispatch(initOperateModalData());
-				dispatch(openOperateModal());
-				dispatch(closeLogInModal());
-			})
-			.catch(e => {
-				console.log('帳號密碼錯誤', e);
-			})
-			.then(() => {
-				// NOTE: 輸入框清空
-				dispatch(changeEmail({email: ''}));
-				dispatch(changePassword({password: ''}));
-				// NOTE: 解開按鈕鎖 DONE
-				dispatch(enableLogInButton());
-			});
-
+export const logInFireBase = (email, password) => async dispatch => {
+	// NOTE: 要鎖住登入按鈕避免重複執行 DONE
+	dispatch(disableLogInButton());
+	try {
+		const user = await firebase.auth().signInWithEmailAndPassword(email, password);
+		console.log('登入成功', user);
+		// TODO: 初始化 operate modal
+		dispatch(initOperateModalUi());
+		dispatch(initOperateModalData());
+		dispatch(openOperateModal());
+		dispatch(closeLogInModal());
+		// NOTE: 輸入框清空
+		dispatch(changeEmail({email: ''}));
+		dispatch(changePassword({password: ''}));
+		// NOTE: 解開按鈕鎖 DONE
+		dispatch(enableLogInButton());
+	} catch (e) {
+		console.log('帳號密碼錯誤', e);
 	}
 }
 
@@ -59,8 +53,8 @@ export const getReminderListNameListFromFirebase = () => (dispatch) => {
 	});
 };
 
-export const createReminderList = (name = '') => (dispatch) => {
-	if(Boolean((typeof name === "string") && !name)) {
+export const createReminderList = (name = '') => async dispatch => {
+	if(typeof name === 'string' && !name) {
 		throw new Error('輸入名稱不正確(這個問題目前還不重要，但要記得回來解決)');
 	}
 	const emptyReminderList = {
@@ -68,14 +62,13 @@ export const createReminderList = (name = '') => (dispatch) => {
 		// list: 'empty',
 	};
 	reminderListRef = reminderListTableRef.child(name);
-	reminderListRef.set(emptyReminderList)
-	.then(() => {
+	try {
+		await reminderListRef.set(emptyReminderList);
 		console.log(`在 firebase 新增成功: reminderList.${reminderListRef.key}`, emptyReminderList);
 		keepSyncingReminderList(dispatch, reminderListRef);
-	})
-	.catch((error) => {
+	} catch (e) {
 		throw new Error(`在firebase新增失敗: reminderList.${name}`);
-	});
+	}
 };
 
 
@@ -88,7 +81,7 @@ export const fetchReminderList = (name = '') => (dispatch) => {
 	keepSyncingReminderList(dispatch, reminderListRef);
 };
 
-export const pushNewReminder = (newReminder = null) => () => {
+export const pushNewReminder = (newReminder = null) => async () => {
 	if(!reminderListRef) {
 		console.log('還沒有選取要新增還是修改明細表');
 		return ;
@@ -104,13 +97,12 @@ export const pushNewReminder = (newReminder = null) => () => {
 		throw setPreviewCompanyNameInputErrorText({errorText: '輸入公司名稱'}) ;
 	}
 
-	reminderListRef.child('list').push(newReminder)
-		.then(() => {
-			console.log(`推送到 firebase reminderList.${reminderListRef.key} 成功`);
-		})
-		.catch(() => {
-			console.log(`推送到 firebase reminderList.${reminderListRef.key} 失敗`);
-		});
+	try {
+		await reminderListRef.child('list').push(newReminder);
+		console.log(`推送到 firebase reminderList.${reminderListRef.key} 成功`);
+	} catch (e) {
+		console.log(`推送到 firebase reminderList.${reminderListRef.key} 失敗`);
+	}
 }
 
 // state裡面的reminderlist 和 firebase 裡的 reminderlist 保持同步
