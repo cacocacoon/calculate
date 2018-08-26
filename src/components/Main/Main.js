@@ -1,5 +1,7 @@
 import React from 'react';
 import Media from 'react-media'
+import {hot} from 'react-hot-loader';
+
 import HeaderBar from  '../../containers/HeaderBar/HeaderBar';
 import LogInModal from '../../containers/Modals/LogIn';
 import Plain from '../../containers/Plains/Plain';
@@ -30,16 +32,10 @@ class Main extends React.Component {
 						<AddReminderButton />
 					</div>
 				) : <Plain A4Style={this.A4Style} />
-			}
-		</Media>
-	);
-}
+				}
+			</Media>
+		);
+	}
 }
 
-export default Main;
-
-// {
-// 	// 	<HeadBar />
-// 	// 	<DataView />
-// 	// 	<CreateTableButton />
-// }
+export default hot(module)(Main);

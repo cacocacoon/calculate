@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require("webpack")
 const APP_DIR = path.resolve(__dirname, 'src')
 const BUILD_DIR = path.resolve(__dirname, 'docs')
 
@@ -24,8 +25,10 @@ const config = {
 	devServer: {
 		inline: true,
 		contentBase: BUILD_DIR,
-		port: 8008
-	}
+		port: 8008,
+		hotOnly: true
+	},
+	plugins: [new webpack.HotModuleReplacementPlugin()]
 }
 
 module.exports = config
