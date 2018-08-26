@@ -4,13 +4,16 @@ import {ENTITY, INIT_REMINDER} from './CONST';
 
 const DIESEL = ENTITY.getIn(['TYPE', 'DIESEL']);
 const LUB_OIL = ENTITY.getIn(['TYPE', 'LUB_OIL']);
+const MAX_DIESEL_COUNT = 2000;
 
 export class BillingReminder {
-	constructor() {
-		this.companyName = '';
-		this.dieselTotal = null;
-		this.lubOilTotal = null;
+	constructor({companyName, entities}) {
+		this.companyName;
 		this.entities = [];
+		this.dieselTotal = new OilTotal();
+		this.lubOilTotal = new OilTotal();
+		this.setCompanyName(companyName);
+		this.setEntities(entities);
 	}
 
 	get totalPriceExcludedTax() {
@@ -25,47 +28,88 @@ export class BillingReminder {
 		return this.totalPriceExcludedTax + this.totalTax;
 	}
 
+	get count() {
+		return this.dieselTotal.count + this.lubOilTotal.count;
+	}
+
 	setCompanyName(companyName = '') {
 		this.companyName = companyName.trim();
 	}
 
 	setEntities(entities = []) {
-		this.entities = entities.map(e => BillingEntity.fromState(e));
+		this.entities = entities.map(e => new BillingEntity(e));
 		this.dieselTotal.entities = this.entities.filter(e => e.type === DIESEL);
 		this.lubOilTotal.entities = this.entities.filter(e => e.type === LUB_OIL);
 	}
 
-	push(newBilling) {
+	push(...newBilling) {
 		this.entities.push(newBilling);
 		switch (newBilling.type) {
 			case DIESEL:
-				this.dieselTotal.entities.push(newBilling);
+				this.dieselTotal.entities.push(...newBilling);
 				break;
 			case LUB_OIL:
-				this.lubOilTotal.entities.push(newBilling);
+				this.lubOilTotal.entities.push(...newBilling);
 				break;
-
 		}
 	}
 
 	toState() {
 		let state = INIT_REMINDER.toJS();
 		state.companyName = this.companyName;
-
 		state.entities = this.entities.map(e => e.toState());
-
 		return state;
 	}
 
-	// NOTE: 只是先從state抓必要資料過來,需要計算全都不做
-	static fromState(state) {
-		let reminder = new BillingReminder();
-		reminder.setCompanyName(state.companyName);
-		reminder.dieselTotal = new OilTotal();
-		reminder.lubOilTotal = new OilTotal();
-		reminder.setEntities(state.entities);
-		return reminder;
+	toInvoiceChunks() {
+		const dieselCount = this.dieselTotal.count;
+		//要另外開剩餘油數量
+		const dieselRemainderCount = dieselCount % MAX_DIESEL_COUNT;
+		// MAX_DIESEL_COUNT 發票要開幾次
+		const times = parseInt(dieselCount / MAX_DIESEL_COUNT);
+		const chunks = [];
+		for (let i = 0; i < times; i++) {
+			chunks.push(new BillingReminder({
+				companyName: this.companyName,
+				entities: [{
+					type: DIESEL,
+					date: '',
+					productName: '',
+					count: MAX_DIESEL_COUNT,
+					unit: 'L',
+					unitPrice: this.dieselTotal.unitPriceIncludeTax,
+					remark: ''
+				}]
+			}));
+		}
+
+		const mainDieselRemindersTotalPrice = chunks.reduce((totalPrice, reminder) => (
+			totalPrice += reminder.totalPrice
+		), 0);
+
+		const dieselRemainderPrice = this.dieselTotal.priceIncludeTax - mainDieselRemindersTotalPrice;
+		if (dieselRemainderPrice <= 0) {
+			alert('看 console');
+			console.warn(dieselRemainderPrice, this);
+		}
+		dieselRemainderCount !== 0 && chunks.push(new BillingReminder({
+			companyName: this.companyName,
+			entities: [{
+				type: DIESEL,
+				date: '',
+				productName: '',
+				count: dieselRemainderCount,
+				unit: 'L',
+				unitPrice: dieselRemainderPrice / dieselRemainderCount,
+				remark: ''
+			}]
+		}));
+		//如果有潤滑油就加到最後一張發票
+		this.lubOilTotal.count > 0 && chunks[chunks.length - 1].push(...this.lubOilTotal.entities);
+
+		return chunks;
 	}
+
 }
 
 class OilTotal {
@@ -84,6 +128,10 @@ class OilTotal {
 			priceIncludeTax += e.price
 		), 0);
 	}
+	
+	get unitPriceIncludeTax() {
+		return this.count > 0 ? this.priceIncludeTax / this.count : 0.0;
+	}
 
 	get priceExcludeTax() {
 		return this.count > 0 ? this.priceIncludeTax / 1.05 : 0;
@@ -96,14 +144,14 @@ class OilTotal {
 
 export class BillingEntity {
 
-	constructor() {
-		this.type = '';
-		this.date = '';
-		this.productName = '';
-		this.count = 0;
-		this.unit = '';
-		this.unitPrice = 0.0;
-		this.remark = '';
+	constructor({type, date, productName, count, unit, unitPrice, remark}) {
+		this.type = type;
+		this.date = date;
+		this.productName = productName;
+		this.count = count;
+		this.unit = unit;
+		this.unitPrice = unitPrice;
+		this.remark = remark;
 	}
 
 	get price() {
@@ -120,19 +168,5 @@ export class BillingEntity {
 			unitPrice: this.unitPrice,
 			remark: this.remark,
 		}
-	}
-
-
-	static fromState(entity) {
-		let billingEntity = new BillingEntity();
-		billingEntity.type = entity.type;
-		billingEntity.date = entity.date;
-		billingEntity.productName = entity.productName;
-		billingEntity.count = entity.count;
-		billingEntity.unit = entity.unit;
-		billingEntity.unitPrice = entity.unitPrice;
-		billingEntity.remark = entity.remark;
-
-		return billingEntity;
 	}
 }

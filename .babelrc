@@ -3,5 +3,8 @@
         ["env", { "module": false }],
         "react"
     ],
-    "plugins": ["transform-async-to-generator"]
+    "plugins": [
+        "transform-async-to-generator",
+        "react-hot-loader/babel"
+    ]
 }

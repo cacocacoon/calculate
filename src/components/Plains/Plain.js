@@ -1,7 +1,8 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
+import {BillingReminder} from '../../constants/dataStructure';
 import PreviewReminderTable from '../../components/Tables/PreviewReminder';
-import InvoiceTable from '../../components/Tables/Invoice';
+import Invoice from '../../components/Tables/Invoice';
 
 class Plain extends React.Component {
 	constructor(props) {
@@ -66,16 +67,7 @@ class Plain extends React.Component {
 			return (
 				<div>
 					{Object.entries(this.reminderList.list).map(([key, reminder]) => (
-						<PreviewReminderTable
-							key={key}
-							previewReminder={reminder}
-							// companyName={reminder.companyName}
-							// entities={reminder.entities}
-							// totalPriceExcludedTax={reminder.totalPriceExcludedTax}
-							// totalTax={reminder.totalTax}
-							// totalPrice={reminder.totalPrice}
-							previewMode={false}
-						/>
+						<PreviewReminderTable key={key} previewReminder={new BillingReminder(reminder)} />
 					))}
 				</div>
 			);
@@ -93,18 +85,20 @@ class Plain extends React.Component {
 				flexWrap: 'wrap',
 				justifyContent: 'flex-start',
 			};
+
+			const invoiceChunkMap = Object.entries(this.reminderList.list)
+										.map(([key, reminder]) => ([key, new BillingReminder(reminder).toInvoiceChunks()]))
+										.reduce((accu, [key, invoiceChunks], index) => {
+											invoiceChunks.forEach(invoiceChunk => {
+												accu[`${key}~${index}`] = invoiceChunk;
+											});
+											return accu;
+										}, {});
+
 			return (
 				<div style={tableStyle}>
-					{Object.entries(this.reminderList.list).map(([key, reminder]) => (
-						<InvoiceTable
-							key={key}
-							companyName={reminder.companyName}
-							dieselTotal={reminder.dieselTotal}
-							lubOilTotal={reminder.lubOilTotal}
-							totalPriceExcludedTax={reminder.totalPriceExcludedTax}
-							totalTax={reminder.totalTax}
-							totalPrice={reminder.totalPrice}
-						/>
+					{Object.entries(invoiceChunkMap).map(([key, invoiceChunk]) => (
+						<Invoice key={key} invoiceChunk={invoiceChunk} />
 					))}
 				</div>
 			);

@@ -159,7 +159,7 @@ const dataReducers = handleActions({
 			unitPrice.value = unitPrice.value * 1.05;
 		}
 
-		let newBilling = BillingEntity.fromState({
+		let newBilling = new BillingEntity({
 			type: type.value,
 			date: date.value,
 			productName: productName.value,
@@ -171,7 +171,7 @@ const dataReducers = handleActions({
 		//把修改中的明細表抓出來
 		let previewReminderState = state.get('previewReminder').toJS();
 		// 轉換成具有計算明細表功能的物件
-		let billingReminder = BillingReminder.fromState(previewReminderState);
+		let billingReminder = new BillingReminder(previewReminderState);
 		// 把新的 billing 加入明細表物件裡面
 		billingReminder.push(newBilling);
 		// 轉換成 plain object, 存回去state

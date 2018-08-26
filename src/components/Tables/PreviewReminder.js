@@ -64,12 +64,11 @@ class PreviewReminder extends React.Component {
 			companyNameInputErrorText,
 		} = this.props;
 
-		const newReminder = BillingReminder.fromState(previewReminder);
-		const entities = newReminder.entities;
-		const companyName = newReminder.companyName;
-		const totalPriceExcludedTax = newReminder.totalPriceExcludedTax;
-		const totalTax = newReminder.totalTax;
-		const totalPrice = newReminder.totalPrice;
+		const entities = previewReminder.entities;
+		const companyName = previewReminder.companyName;
+		const totalPriceExcludedTax = previewReminder.totalPriceExcludedTax;
+		const totalTax = previewReminder.totalTax;
+		const totalPrice = previewReminder.totalPrice;
 
 		// 沒有東西就不用render元件
 		if(entities.length == 0) {
