@@ -3,7 +3,6 @@ import Modal from './Modal';
 import FlatButton from 'material-ui/FlatButton';
 import CreateEntityPanel from '../../containers/Panels/CreateEntity';
 import PreviewReminderTable from '../../containers/Tables/PreviewReminder';
-import Divider from 'material-ui/Divider';
 class Editor extends React.Component {
 	constructor() {
 		super();
@@ -56,7 +55,7 @@ class Editor extends React.Component {
 				modal={false}
 				onRequestClose={closeEditorModal}
 				contentStyle={{width: '800px', maxWidth: '800px'}}
-				actions={[<CreateEntityPanel />, <CleanButton />, <CloseButton />, <SaveButton />]}
+				actions={[<CreateEntityPanel key={0} />, <CleanButton key={1} />, <CloseButton key={2} />, <SaveButton key={3} />]}
 				actionsContainerStyle={{display: 'static', bottom: 0}}
 				>
 				<PreviewReminderTable />

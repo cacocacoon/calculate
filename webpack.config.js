@@ -4,7 +4,7 @@ const APP_DIR = path.resolve(__dirname, 'src')
 const BUILD_DIR = path.resolve(__dirname, 'docs')
 
 const config = {
-	entry: APP_DIR + '/index.js',
+	entry: ['babel-polyfill', APP_DIR + '/index.js'],
 	output: {
 		path: BUILD_DIR,
 		filename: 'app.js'

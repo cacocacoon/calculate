@@ -1,4 +1,5 @@
 import {connect} from 'react-redux';
+import {BillingReminder} from '../../constants/dataStructure';
 import PreviewReminderTable from '../../components/Tables/PreviewReminder';
 
 import {
@@ -8,7 +9,7 @@ import {
 
 export default connect(
 	(state) => ({
-		previewReminder: state.getIn(['data', 'previewReminder']).toJS(),
+		previewReminder: new BillingReminder(state.getIn(['data', 'previewReminder']).toJS()),
 		// entities: state.getIn(['data', 'previewReminder', 'entities']).toJS(),
 		// totalPriceExcludedTax: state.getIn(['data', 'previewReminder', 'totalPriceExcludedTax']),
 		// totalTax: state.getIn(['data', 'previewReminder', 'totalTax']),

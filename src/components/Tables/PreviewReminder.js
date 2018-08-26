@@ -1,4 +1,5 @@
 import React from 'react';
+import TextField from 'material-ui/TextField';
 import {BillingReminder} from '../../constants/dataStructure'
 
 class PreviewReminder extends React.Component {

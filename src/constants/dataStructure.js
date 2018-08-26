@@ -43,8 +43,8 @@ export class BillingReminder {
 	}
 
 	push(...newBilling) {
-		this.entities.push(newBilling);
-		switch (newBilling.type) {
+		this.entities.push(...newBilling);
+		switch (newBilling[0].type) {
 			case DIESEL:
 				this.dieselTotal.entities.push(...newBilling);
 				break;
@@ -61,7 +61,7 @@ export class BillingReminder {
 		return state;
 	}
 
-	toInvoiceChunks() {
+	toInvoiceChunks(chunkId = 0) {
 		const dieselCount = this.dieselTotal.count;
 		//要另外開剩餘油數量
 		const dieselRemainderCount = dieselCount % MAX_DIESEL_COUNT;
@@ -70,7 +70,7 @@ export class BillingReminder {
 		const chunks = [];
 		for (let i = 0; i < times; i++) {
 			chunks.push(new BillingReminder({
-				companyName: this.companyName,
+				companyName: `${this.companyName} ${chunkId}`,
 				entities: [{
 					type: DIESEL,
 					date: '',
@@ -93,7 +93,7 @@ export class BillingReminder {
 			console.warn(dieselRemainderPrice, this);
 		}
 		dieselRemainderCount !== 0 && chunks.push(new BillingReminder({
-			companyName: this.companyName,
+			companyName: `${this.companyName} ${chunkId}`,
 			entities: [{
 				type: DIESEL,
 				date: '',

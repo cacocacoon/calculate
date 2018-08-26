@@ -14,8 +14,7 @@ class Plain extends React.Component {
 			//default setting
 			this.A4Style = {
 				minHeight: '29.7cm',
-				width: '100%',
-				maxWidth: '21cm',
+				width: '21cm',
 				margin: '30px auto',
 				padding: '1cm 1.5cm',
 			};
@@ -87,9 +86,9 @@ class Plain extends React.Component {
 			};
 
 			const invoiceChunkMap = Object.entries(this.reminderList.list)
-										.map(([key, reminder]) => ([key, new BillingReminder(reminder).toInvoiceChunks()]))
-										.reduce((accu, [key, invoiceChunks], index) => {
-											invoiceChunks.forEach(invoiceChunk => {
+										.map(([key, reminder], index) => ([key, new BillingReminder(reminder).toInvoiceChunks(index)]))
+										.reduce((accu, [key, invoiceChunks]) => {
+											invoiceChunks.forEach((invoiceChunk, index) => {
 												accu[`${key}~${index}`] = invoiceChunk;
 											});
 											return accu;
