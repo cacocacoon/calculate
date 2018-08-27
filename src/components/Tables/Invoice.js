@@ -8,27 +8,29 @@ class Invoice extends React.Component {
 			flexBasis: '100%',
 			textAlign: 'right',
 			borderRight: '1px solid',
-			boxSizing: 'border-box',
+			lineHeight: '25px'
 		};
 		this.mediumSize = {
 			flexBasis: '66%',
 			textAlign: 'right',
 			borderRight: '1px solid',
-			boxSizing: 'border-box',
+			lineHeight: '25px'
 		};
 		this.smallSize = {
 			flexBasis: '33%',
 			textAlign: 'right',
 			borderRight: '1px solid',
-			boxSizing: 'border-box',
+			lineHeight: '25px'
 		};
 		this.size40 = {
 			flexBasis: '40%',
 			textAlign: 'right',
+			lineHeight: '25px'
 		};
 		this.size20 = {
 			flexBasis: '20%',
 			textAlign: 'right',
+			lineHeight: '25px'
 		};
 	}
 
@@ -50,7 +52,7 @@ class Invoice extends React.Component {
 		const totalPrice = invoiceChunk.totalPrice;
 
 		return (
-			<div style={{display: 'flex', flexWrap: 'wrap', flexDirection: 'row', flexBasis: '6cm', border: '1px solid'}}>
+			<div style={{display: 'flex', flexWrap: 'wrap', flexDirection: 'row', flexBasis: '6cm', border: '1px solid', pageBreakInside: 'avoid'}}>
 				<div style={this.largeSize}>{invoiceChunk.companyName}</div>
 				<div style={this.smallSize}>數量</div>
 				<div style={this.smallSize}>單價</div>

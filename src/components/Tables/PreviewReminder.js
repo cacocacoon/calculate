@@ -32,18 +32,21 @@ class PreviewReminder extends React.Component {
 			flexBasis: '10%',
 			textAlign: 'center',
 			border: '1px solid',
+			lineHeight: '30px'
 		};
 
 		this.mediumCellStyle = {
 			flexBasis: '15%',
 			textAlign: 'center',
 			border: '1px solid',
+			lineHeight: '30px'
 		};
 
 		this.longCellStyle = {
 			flexBasis: '85%',
 			textAlign: 'center',
 			border: '1px solid',
+			lineHeight: '30px'
 		};
 	}
 
@@ -56,11 +59,6 @@ class PreviewReminder extends React.Component {
 			previewMode,
 			setCompanyName,
 			previewReminder,
-			// companyName,
-			// entities,
-			// totalPriceExcludedTax,
-			// totalTax,
-			// totalPrice,
 			companyNameInputErrorText,
 		} = this.props;
 
