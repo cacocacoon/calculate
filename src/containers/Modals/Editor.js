@@ -29,9 +29,6 @@ export default connect(
 			catch(action) {
 				dispatch(action);
 			}
-			finally {
-
-			}
 		},
 
 		closeEditorModal: () => {

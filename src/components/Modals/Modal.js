@@ -18,7 +18,6 @@ class Modal extends React.Component {
 			modal,
 			contentStyle,
 			titleStyle,
-			bodyStyle,
 			children,
 			onRequestClose,
 		} = this.props;

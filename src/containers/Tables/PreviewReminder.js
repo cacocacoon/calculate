@@ -10,10 +10,6 @@ import {
 export default connect(
 	(state) => ({
 		previewReminder: new BillingReminder(state.getIn(['data', 'previewReminder']).toJS()),
-		// entities: state.getIn(['data', 'previewReminder', 'entities']).toJS(),
-		// totalPriceExcludedTax: state.getIn(['data', 'previewReminder', 'totalPriceExcludedTax']),
-		// totalTax: state.getIn(['data', 'previewReminder', 'totalTax']),
-		// totalPrice: state.getIn(['data', 'previewReminder', 'totalPrice']),
 		previewMode: true,
 		companyNameInputErrorText: state.getIn(['ui', 'previewReminder', 'companyNameInputErrorText']),
 	}),

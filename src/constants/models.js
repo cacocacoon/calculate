@@ -1,6 +1,5 @@
 import Immutable from 'immutable';
 import {
-	ENTITY,
 	INIT_CREATE_ENTITY,
 	INIT_REMINDER,
 } from '../constants/CONST';

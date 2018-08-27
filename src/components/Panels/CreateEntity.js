@@ -6,7 +6,6 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import ActionDone from 'material-ui/svg-icons/action/done';
-import {blue500} from 'material-ui/styles/colors';
 import InvertColors from 'material-ui/svg-icons/action/invert-colors';
 import {ENTITY} from '../../constants/CONST';
 class CreateEntity extends React.Component {

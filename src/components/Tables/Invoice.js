@@ -50,7 +50,7 @@ class Invoice extends React.Component {
 		const totalPrice = invoiceChunk.totalPrice;
 
 		return (
-			<div style={{display: 'flex', flexWrap: 'wrap', flexDirection: 'row', flexBasis: '5.5cm', border: '1px solid'}}>
+			<div style={{display: 'flex', flexWrap: 'wrap', flexDirection: 'row', flexBasis: '6cm', border: '1px solid'}}>
 				<div style={this.largeSize}>{invoiceChunk.companyName}</div>
 				<div style={this.smallSize}>數量</div>
 				<div style={this.smallSize}>單價</div>

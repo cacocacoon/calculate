@@ -7,8 +7,6 @@ import {
 } from 'material-ui/Stepper';
 import Chip from 'material-ui/Chip';
 import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
-import TextField from 'material-ui/TextField';
 import AutoComplete from 'material-ui/AutoComplete';
 import {OPERATE_REMINDER_LIST} from '../../constants/CONST';
 
@@ -35,9 +33,7 @@ class InitReminderList extends React.Component {
 			goToStep,
 			step,
 			type,
-			name,
 			nameList,
-			setInputName,
 			errorText,
 			finish
 		} = this.props;
