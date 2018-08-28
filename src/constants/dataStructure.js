@@ -42,16 +42,18 @@ export class BillingReminder {
 		this.lubOilTotal.entities = this.entities.filter(e => e.type === LUB_OIL);
 	}
 
-	push(...newBilling) {
-		this.entities.push(...newBilling);
-		switch (newBilling[0].type) {
-			case DIESEL:
-				this.dieselTotal.entities.push(...newBilling);
-				break;
-			case LUB_OIL:
-				this.lubOilTotal.entities.push(...newBilling);
-				break;
-		}
+	push(...newBillings) {
+		this.entities.push(...newBillings);
+		newBillings.forEach(newBilling => {
+			switch (newBilling.type) {
+				case DIESEL:
+					this.dieselTotal.entities.push(newBilling);
+					break;
+				case LUB_OIL:
+					this.lubOilTotal.entities.push(newBilling);
+					break;
+			}
+		});
 	}
 
 	toState() {
@@ -92,7 +94,7 @@ export class BillingReminder {
 			alert('看 console');
 			console.warn(dieselRemainderPrice, this);
 		}
-		dieselRemainderCount !== 0 && chunks.push(new BillingReminder({
+		dieselRemainderCount > 0 && chunks.push(new BillingReminder({
 			companyName: `${this.companyName} ${chunkId}`,
 			entities: [{
 				type: DIESEL,
