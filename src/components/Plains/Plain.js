@@ -1,8 +1,8 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
 import {BillingReminder} from '../../constants/dataStructure';
-import PreviewReminderTable from '../../components/Tables/PreviewReminder';
-import Invoice from '../../components/Tables/Invoice';
+import PreviewReminderTable from '../../dynamicImport/PreviewReminder';
+import Invoice from '../../dynamicImport/Invoice';
 
 class Plain extends React.Component {
 	constructor(props) {

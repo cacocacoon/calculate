@@ -12,6 +12,7 @@ module.exports = {
     "plugins": [
         "@babel/plugin-transform-async-to-generator",
         "@babel/plugin-proposal-class-properties",
+        "@babel/plugin-syntax-dynamic-import",
         "react-hot-loader/babel"
     ]
 }

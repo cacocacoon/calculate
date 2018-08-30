@@ -3,10 +3,10 @@ import Media from 'react-media'
 import {hot} from 'react-hot-loader';
 
 import HeaderBar from  '../../containers/HeaderBar/HeaderBar';
-import LogInModal from '../../containers/Modals/LogIn';
+import LogInModal from '../../dynamicImport/LogIn';
 import Plain from '../../containers/Plains/Plain';
-import OperateModal from '../../containers/Modals/Operate';
-import EditorModal from '../../containers/Modals/Editor';
+import OperateModal from '../../dynamicImport/Operate';
+import EditorModal from '../../dynamicImport/Editor'
 import AddReminderButton from '../../containers/Button/AddReminder';
 
 class Main extends React.Component {
