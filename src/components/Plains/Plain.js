@@ -37,10 +37,7 @@ class Plain extends React.Component {
 		};
 	}
 
-
-
 	render() {
-
 		const {
 			reminderList
 		} = this.props;
