@@ -1,10 +1,5 @@
 module.exports = {
     "presets": [
-        ["@babel/preset-env", {
-            "modules": false,
-            "useBuiltIns": "usage",
-            "targets": "last 2 Chrome versions"
-        }],
         ["@babel/preset-react", {
             "development": process.env.BABEL_ENV === "development",
         }]
