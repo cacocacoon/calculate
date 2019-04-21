@@ -82,19 +82,10 @@ class Plain extends React.Component {
 				justifyContent: 'flex-start',
 			};
 
-			const invoiceChunkMap = Object.entries(this.reminderList.list)
-										.map(([key, reminder], index) => ([key, new BillingReminder(reminder).toInvoiceChunks(index)]))
-										.reduce((accu, [key, invoiceChunks]) => {
-											invoiceChunks.forEach((invoiceChunk, index) => {
-												accu[`${key}~${index}`] = invoiceChunk;
-											});
-											return accu;
-										}, {});
-
 			return (
 				<div style={tableStyle}>
-					{Object.entries(invoiceChunkMap).map(([key, invoiceChunk]) => (
-						<Invoice key={key} invoiceChunk={invoiceChunk} />
+					{Object.entries(this.reminderList.list).map(([key, reminder]) => (
+						<Invoice key={key} invoiceChunk={new BillingReminder(reminder)} />
 					))}
 				</div>
 			);

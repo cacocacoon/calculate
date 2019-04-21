@@ -4,7 +4,6 @@ import {ENTITY, INIT_REMINDER} from './CONST';
 
 const DIESEL = ENTITY.getIn(['TYPE', 'DIESEL']);
 const LUB_OIL = ENTITY.getIn(['TYPE', 'LUB_OIL']);
-const MAX_DIESEL_COUNT = 2000;
 
 export class BillingReminder {
 	constructor({companyName, entities}) {
@@ -62,56 +61,6 @@ export class BillingReminder {
 		state.entities = this.entities.map(e => e.toState());
 		return state;
 	}
-
-	toInvoiceChunks(chunkId = 0) {
-		const dieselCount = this.dieselTotal.count;
-		//要另外開剩餘油數量
-		const dieselRemainderCount = dieselCount % MAX_DIESEL_COUNT;
-		// MAX_DIESEL_COUNT 發票要開幾次
-		const times = parseInt(dieselCount / MAX_DIESEL_COUNT);
-		const chunks = [];
-		for (let i = 0; i < times; i++) {
-			chunks.push(new BillingReminder({
-				companyName: `${this.companyName} ${chunkId}`,
-				entities: [{
-					type: DIESEL,
-					date: '',
-					productName: '',
-					count: MAX_DIESEL_COUNT,
-					unit: 'L',
-					unitPrice: this.dieselTotal.unitPriceIncludeTax,
-					remark: ''
-				}]
-			}));
-		}
-
-		const mainDieselRemindersTotalPrice = chunks.reduce((totalPrice, reminder) => (
-			totalPrice += reminder.totalPrice
-		), 0);
-
-		const dieselRemainderPrice = this.dieselTotal.priceIncludeTax - mainDieselRemindersTotalPrice;
-		if (dieselRemainderPrice <= 0) {
-			alert('看 console');
-			console.warn(dieselRemainderPrice, this);
-		}
-		dieselRemainderCount > 0 && chunks.push(new BillingReminder({
-			companyName: `${this.companyName} ${chunkId}`,
-			entities: [{
-				type: DIESEL,
-				date: '',
-				productName: '',
-				count: dieselRemainderCount,
-				unit: 'L',
-				unitPrice: dieselRemainderPrice / dieselRemainderCount,
-				remark: ''
-			}]
-		}));
-		//如果有潤滑油就加到最後一張發票
-		this.lubOilTotal.count > 0 && chunks[chunks.length - 1].push(...this.lubOilTotal.entities);
-
-		return chunks;
-	}
-
 }
 
 class OilTotal {
